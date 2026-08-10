@@ -193,17 +193,17 @@ AI가 핵심인 서비스인 만큼 6대 원칙을 모두 점검했다.
 
 ## Team & Contributions
 
-7인이 데이터 전처리부터 책임 있는 AI까지 전 과정을 분담했다.
+7인이 데이터 전처리부터 책임 있는 AI까지 전 과정을 분담했다. 파이프라인 순서로 적는다.
 
 | 이름 | GitHub | 담당 | 주요 기여 |
 | --- | --- | --- | --- |
+| **지경민** | [@jen282](https://github.com/jen282) | 이미지 · 데이터 전처리 | MinerU 이미지·캡션 추출, 스캔 PDF 정제, "서기" 창구 챗봇, 전처리 파이프라인, 인덱싱·라우팅 실험 |
+| **이재모** | [@imjml](https://github.com/imjml) | 전처리 · GraphRAG | OpenCV 이미지 분리·캡션(초기), 인덱싱·퀴즈 실험 |
+| **조윤재** | [@liminal-cipher](https://github.com/liminal-cipher) | GraphRAG · 백엔드 | 기획·아키텍처 설계, GraphRAG 백엔드(FastAPI)·라이브 오케스트레이터 구축, 방(K) 자동화·이미지 매칭, Azure Cosmos DB / Blob 기반 상태 영속성 |
+| **김인준** | [@JunK98](https://github.com/JunK98) | GraphRAG | AI 교안 테스트, GraphRAG 검색·요약·쿼리 라우팅, 퀴즈 근거 검증 |
 | **오준상** | [@PhrenO0](https://github.com/PhrenO0) | 3D 엔진 · UI/UX | VWorld 지도·방 입장, GLB 가구 인식·3D 좌표·동선·카메라(memory-walk), 기술 설명 페이지·통일 내비, 데모 흐름 |
 | **오효석** | [@ohyoseok92](https://github.com/ohyoseok92) | 3D 엔진 · 보안 | 프리셋·랜드마크 마커 적용, memory-walk 엔진, 보안(Stored XSS 방어) |
 | **김시언** | [@happybluebird](https://github.com/happybluebird) | UI · 데이터 전처리 | 홈·챗봇·퀴즈 UI, TTS 공간음향(HRTF), 지도 UX, RAG 챗봇 연동 |
-| **지경민** | [@jen282](https://github.com/jen282) | 이미지 · 데이터 전처리 | MinerU 이미지·캡션 추출, 스캔 PDF 정제, "서기" 창구 챗봇, 전처리 파이프라인, 인덱싱·라우팅 실험 |
-| **조윤재** | [@liminal-cipher](https://github.com/liminal-cipher) | GraphRAG · 백엔드 | 기획·아키텍처 설계, GraphRAG 백엔드(FastAPI)·라이브 오케스트레이터 구축, 방(K) 자동화·이미지 매칭, Azure Cosmos DB / Blob 기반 상태 영속성 |
-| **김인준** | [@JunK98](https://github.com/JunK98) | GraphRAG | AI 교안 테스트, GraphRAG 검색·요약·쿼리 라우팅, 퀴즈 근거 검증 |
-| **이재모** | [@imjml](https://github.com/imjml) | GraphRAG · 전처리 | OpenCV 이미지 분리·캡션(초기), 인덱싱·퀴즈 실험 |
 
 > 사람별 여정·Git 커밋·소감·타임라인 전체는 **[CONTRIBUTORS.md](CONTRIBUTORS.md)** 참조.
 

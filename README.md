@@ -44,7 +44,7 @@
 
 사업 확장 구상(시장·타깃·수익 모델)은 [docs/BUSINESS.md](docs/BUSINESS.md)에 분리해 두었습니다.
 
-## What it does
+## What It Does
 
 | 기능 | 설명 | 역할 |
 | --- | --- | --- |

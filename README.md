@@ -9,17 +9,9 @@
 ![FastAPI](https://img.shields.io/badge/FastAPI-Backend-009688?logo=fastapi&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-Frontend-646CFF?logo=vite&logoColor=white)
 
-Microsoft AI School 9기 3차 프로젝트 · 팀 고민중독
+Microsoft AI School 9기 3차 프로젝트 · 팀 고민중독 (7인) · 2026.05 ~ 06
 
 [라이브 데모](https://3d-mindpalace-ai-fxf8dyfqega3hvbp.canadacentral-01.azurewebsites.net/) · [GraphRAG 파이프라인 repo](https://github.com/liminal-cipher/mind-palace-graphrag)
-
-## Overview
-
-회랑은 학습 자료(PDF·노트)를 **걸어다닐 수 있는 3D 기억의 궁전**으로 자동 변환하는 Azure AI 기반 공간 기억 학습 서비스입니다.
-
-사용자가 자료를 올리면, AI가 개념과 관계를 추출해 **GraphRAG 지식그래프**로 구조화하고, 의미가 가까운 개념끼리 '방'으로 묶습니다. 그 방들은 VWorld 3D 지도 위 명소로 떠오르고, 입장하면 가구마다 학습 개념이 배치된 방 내부로 들어갑니다. 사용자는 공간을 **1인칭으로 걸으며 외우고**, 간격 반복으로 복습하며, 챗봇·퀴즈로 근거 기반 확인을 합니다.
-
-핵심은 "AI가 궁전을 만든다"가 아니라 **"공간 구조 자체가 개념의 의미 구조에서 나온다"** 는 데 있습니다. PDF 전처리 → GraphRAG → 3D 공간 생성 → 학습·복습까지 하나의 흐름으로 이어지며, 모든 단계는 책임 있는 AI 6원칙으로 점검했습니다.
 
 ## Motivation
 
@@ -30,6 +22,8 @@ Microsoft AI School 9기 3차 프로젝트 · 팀 고민중독
 **기억의 궁전(method of loci)** 은 정보에 '위치'를 부여해 경로를 따라 회상하는 고전 기억술입니다. 효과는 신경과학으로 입증됐지만 정작 쓰기 어렵습니다. 효과를 보려면 **분류 → 단서화 → 배치 → 반복**을 사용자가 직접 설계해야 하고, 이 설계 자체가 또 하나의 공부이기 때문입니다. 설계 부담, 진입 장벽, 위치 정보가 없는 평면 자료, 복습 관리의 어려움이 겹쳐 있습니다.
 
 > **회랑의 약속:** 암기를 대신 해주지는 않습니다. 대신 **궁전 설계의 부담을 AI가 집니다.** 사용자는 외우고 복습하는 데만 집중합니다.
+
+핵심은 "AI가 궁전을 만든다"가 아니라 **"공간 구조 자체가 개념의 의미 구조에서 나온다"** 는 데 있습니다. 방의 경계도, 개념의 배치도 자료를 읽어 만든 구조에서 파생됩니다.
 
 ### Why Spatial Memory Works
 
@@ -43,6 +37,8 @@ Microsoft AI School 9기 3차 프로젝트 · 팀 고민중독
 사업 확장 구상(시장·타깃·수익 모델)은 [docs/BUSINESS.md](docs/BUSINESS.md)에 분리해 두었습니다.
 
 ## What It Does
+
+자료를 올리면 AI가 개념과 관계를 추출해 **GraphRAG 지식그래프**로 구조화하고, 의미가 가까운 개념끼리 '방'으로 묶습니다. 그 방들은 VWorld 3D 지도 위 명소로 떠오르고, 입장하면 가구마다 학습 개념이 배치된 방 내부로 들어갑니다. 사용자는 공간을 **1인칭으로 걸으며 외우고**, 간격 반복으로 복습하며, 챗봇·퀴즈로 근거 기반 확인을 합니다.
 
 | 기능 | 설명 | 역할 |
 | --- | --- | --- |
@@ -112,19 +108,7 @@ Microsoft AI School 9기 3차 프로젝트 · 팀 고민중독
 - **2D 설계도 · 3D 워크스루 · 간격 복습 · 챗봇·퀴즈**를 한 흐름으로.
 - 접근성: Azure 음성 + **공간음향(HRTF)**, 읽기 속도·글자 크기·테마, 저사양 모드.
 
-## Tech Stack
-
-| 영역 | 기술 |
-| --- | --- |
-| **AI · LLM** | Azure OpenAI (**gpt-4.1-mini** 인덱싱·질의 / **GPT-4.1** 비전 사물 명명) · text-embedding-3-small · Microsoft **GraphRAG** (Leiden community report) · **BGE-M3** 쿼리 라우팅 |
-| **문서 전처리** | PyMuPDF · Azure Content Understanding · PaddleOCR + Ko-pii(PII) · DocLayout-YOLO |
-| **3D 엔진** | Three.js (GLTFLoader+DRACO) · VWorld 3D 지도 · 카카오맵 Geocoding · Azure AI Vision(스캐너) |
-| **음성·접근성** | Azure Speech(TTS/STT) · 공간음향(HRTF) |
-| **백엔드** | FastAPI BFF: 계정(Cosmos NoSQL)·서재 저장·퀴즈 기록·토큰 사용량 집계 ※ GraphRAG 인덱싱·오케스트레이터·Palace 생성은 별도 repo [mind-palace-graphrag](https://github.com/liminal-cipher/mind-palace-graphrag) |
-| **프론트엔드** | Vite · Vanilla JS / legacy HTML |
-| **인프라** | Azure App Service · Azure Safety Filter |
-
-## Folder Structure
+### 5. repo 구조
 
 ```
 mind-palace/  (팀 정본: PhrenO0/Mindpalace_Microsoft9ai_Thirdprj-)
@@ -139,15 +123,27 @@ mind-palace/  (팀 정본: PhrenO0/Mindpalace_Microsoft9ai_Thirdprj-)
 └─ deploy-build.ps1 / startup.sh / requirements.txt
 ```
 
-> **GraphRAG 인덱싱·라이브 오케스트레이터·Palace 생성 파이프라인**은 별도 저장소 [mind-palace-graphrag](https://github.com/liminal-cipher/mind-palace-graphrag)에 있습니다. 이 저장소의 `backend/`는 계정·저장을 담당하는 BFF입니다.
+## Tech Decisions
 
-```bash
-# 백엔드
-pip install -r requirements.txt   # Azure OpenAI/Vision 등은 환경변수 주입 → startup.sh
-# 프론트
-cd frontend && npm install && npm run dev
-# 배포: Azure App Service (deploy-build.ps1)
-```
+| 영역 | 선택 | 이유 |
+| --- | --- | --- |
+| 스캔 PDF 텍스트 추출 | **Azure Content Understanding** | Docling·MinerU·PyMuPDF를 같은 스캔 교과서로 직접 비교했습니다. 한국어 정확도가 가장 높아 지도·사진 속 한자와 고유명사('도산서원')까지 읽어냈고 띄어쓰기가 원문에 가깝게 보존됐습니다. 응답 JSON의 `content`에 `figcaption`·`pageHeader`·`table` 태그가 담겨 와 본문과 캡션을 섞지 않고 파싱할 수 있는 것이 결정적이었습니다 |
+| 디지털 PDF 추출 | **PyMuPDF** (로컬) | 텍스트 레이어가 이미 있으면 외부 API를 부를 이유가 없습니다. 로컬·무료·빠르고, 스캔본에 필요한 구조 분리와 이미지 후처리 단계를 통째로 건너뛰어 시간과 비용을 줄입니다 |
+| 이미지 재검출 | **DocLayout-YOLO** | 스캔본은 레이아웃이 불규칙해 페이지 전체가 이미지 1개로 잡히거나 둘이 붙어 인식됩니다. 레이아웃 모델로 재검출한 뒤 검출 개수로 분기하고, 면적비 게이트로 머리글 로고 같은 잡동사니를 걸러냅니다 |
+| 개념·관계 구조화 | **Microsoft GraphRAG** (Leiden) | 일반 RAG는 흩어진 정보를 모으고 전체 흐름을 잡는 데 약합니다. 엔티티·관계 그래프와 community report가 있어야 '방'의 경계를 의미 단위로 자를 수 있습니다 |
+| 인덱싱 모델 | **gpt-4.1-mini** | 모델 4종을 같은 자료로 스윕해 산출물과 비용을 비교한 뒤 채택했습니다. 사물 명명은 비전이 필요해 GPT-4.1을 따로 씁니다 |
+| RAG 라우팅 | **BGE-M3 쿼리 라우터** | 요약·비교 질문은 community report(global), 특정 개념 질문은 entities+relationships(local)로 가야 합니다. 라우팅이 어긋나면 자료에 있는데도 답을 못 받습니다. global↔local 폴백과 '근거 없으면 거절'을 함께 둡니다 |
+| 3D 지도 | **VWorld 국가 3D 지도** | 국가 단위 실제 건물 타일을 그대로 쓸 수 있어 장소법의 '실재하는 장소' 감각이 살아납니다. 다만 지역마다 정밀도가 달라 엔진 기본 최적화를 두면 건물이 사라져, 디테일을 낮추고 안정성을 택했습니다 |
+| 상태 저장 | **Cosmos DB + Blob** | 인덱싱이 수 분 걸리는 파이프라인이라 서버가 재시작되면 결과가 사라지면 안 됩니다. 계정·서재·퀴즈 기록은 Cosmos, 산출물은 Blob으로 분리했습니다 |
+
+| 그 외 스택 | |
+| --- | --- |
+| 임베딩·PII | text-embedding-3-small · PaddleOCR + Ko-pii(이중 마스킹) |
+| 3D·프론트 | Three.js (GLTFLoader+DRACO) · 카카오맵 Geocoding · Azure AI Vision(방 스캐너) · Vite |
+| 음성·접근성 | Azure Speech(TTS/STT) · 공간음향(HRTF) |
+| 백엔드·인프라 | FastAPI BFF · Azure App Service · Azure Safety Filter |
+
+> 이 repo의 `backend/`는 계정·저장을 담당하는 BFF입니다. GraphRAG 인덱싱·오케스트레이터·Palace 생성은 별도 repo [mind-palace-graphrag](https://github.com/liminal-cipher/mind-palace-graphrag)에 있습니다.
 
 ## Results & Limitations
 
@@ -161,45 +157,23 @@ cd frontend && npm install && npm run dev
 
 **한계를 명시합니다.** 학습 효과(회상률 개선)의 자체 정량 평가는 미측정입니다. 위 기억 효과 수치는 외부 문헌이지 이 서비스의 실측이 아닙니다. 검색 품질은 관련성·근거 충실성 점검 수준이며 벤치마크 수치는 없습니다.
 
-## Team
+## Getting Started
 
-**고민중독** (MS AI School 9기), 7인이 데이터 전처리부터 책임 있는 AI까지 전 과정을 분담.
+라이브 데모는 위 헤더 링크로 바로 접속할 수 있습니다. 아래는 직접 띄울 때입니다.
 
-| 이름 | 역할 |
-| --- | --- |
-| **오준상** | 3D 엔진 & UI/UX |
-| **오효석** | 3D 엔진 및 보안 |
-| **김시언** | UI 및 데이터 전처리 |
-| **지경민** | 이미지 및 데이터 전처리 |
-| **조윤재** | GraphRAG 및 백엔드 |
-| **김인준** | GraphRAG |
-| **이재모** | GraphRAG (초기 이미지 전처리) |
+**필요한 Azure 리소스**: OpenAI(gpt-4.1-mini, GPT-4.1, text-embedding-3-small), Content Understanding, AI Vision, Speech, Cosmos DB, Blob Storage. 키와 엔드포인트는 환경변수로 주입하며 `startup.sh`가 읽습니다.
 
-## Contributions
+```bash
+# 백엔드 (FastAPI BFF)
+pip install -r requirements.txt
 
-| 이름 | 주요 기여 |
-| --- | --- |
-| 오준상 | VWorld 지도·방 입장, GLB 가구 인식·3D 좌표·동선·카메라(memory-walk), 기술 설명 페이지·통일 내비, 데모 흐름 |
-| 오효석 | 프리셋·랜드마크 마커 적용, memory-walk 엔진, 보안(Stored XSS 방어) |
-| 김시언 | 홈·챗봇·퀴즈 UI, TTS 공간음향(HRTF), 지도 UX, RAG 챗봇 연동 |
-| 지경민 | MinerU 이미지·캡션 추출, 스캔 PDF 정제, "서기" 창구 챗봇, 전처리 파이프라인 |
-| 조윤재 | 기획·아키텍처 설계, GraphRAG 백엔드(FastAPI)·라이브 오케스트레이터 구축, 방(K) 자동화·이미지 매칭, Azure Cosmos DB / Blob 기반 상태 영속성 |
-| 김인준 | AI 교안 테스트, GraphRAG 인덱싱·검색·요약, 퀴즈 근거 검증 |
-| 이재모 | OpenCV 이미지 분리·캡션(초기) → GraphRAG 인덱싱·퀴즈 |
+# 프론트엔드
+cd frontend && npm install && npm run dev
 
-> 사람별 여정·Git 커밋·소감·타임라인 전체는 **[CONTRIBUTORS.md](CONTRIBUTORS.md)** 참조.
+# 배포: Azure App Service (deploy-build.ps1)
+```
 
-## My Role (조윤재)
-
-이 저장소는 팀 정본의 fork이며, 포트폴리오 관점에서 본인 몫을 검증 가능한 증거와 함께 적어 둡니다.
-
-| 영역 | 산출물 | 증거 |
-| --- | --- | --- |
-| GraphRAG 파이프라인·백엔드 | 인덱싱 실험·최종 구성 채택, 라이브 오케스트레이터, Room 자동화·이미지 매칭, 상태 영속성, 비용 추적 | 별도 저장소 [mind-palace-graphrag](https://github.com/liminal-cipher/mind-palace-graphrag) (259커밋 중 242 본인) |
-| 앱 BFF 영속성 레이어 | 사용자 DB(Cosmos NoSQL) `backend/app/cosmos.py`, 서재 Blob 하이브리드 `backend/app/storage.py`, 퀴즈 결과·연상 장면 저장, 토큰 사용량 집계 | 커밋 `bb48f71`·`4e81e84`·`8574dc3`, 설계 문서 [backend/USER_DB.md](backend/USER_DB.md) |
-| 저장소 통합 관리 | 팀 PR 24건 리뷰·머지, 데모 모드 온오프, 지역 간 데이터 누수·memory-walk 상태 버그 수정 | PR #1~#24 머지 이력 |
-
-※ 3D 엔진·UI 본체는 오준상의 작업입니다. 전체 분담은 위 Team·Contributions 표를 따릅니다.
+GraphRAG 인덱싱과 Palace 생성은 이 repo에 없습니다. [mind-palace-graphrag](https://github.com/liminal-cipher/mind-palace-graphrag)의 실행 방법을 따로 참고하세요.
 
 ## Responsible AI
 
@@ -214,6 +188,30 @@ AI가 핵심인 서비스인 만큼 6대 원칙을 모두 점검했습니다.
 | 책임성 | AI 한계 고지 · 노드명/배치 직접 수정 · 학습 항목 직접 결정 |
 | 포용성 | 음성·공간음향 · 스크린리더 접근성 · 글자 크기 · 저사양 모드 |
 
+## Team & Contributions
+
+7인이 데이터 전처리부터 책임 있는 AI까지 전 과정을 분담했습니다.
+
+| 이름 | GitHub | 담당 | 주요 기여 |
+| --- | --- | --- | --- |
+| **오준상** | [@PhrenO0](https://github.com/PhrenO0) | 3D 엔진 · UI/UX | VWorld 지도·방 입장, GLB 가구 인식·3D 좌표·동선·카메라(memory-walk), 기술 설명 페이지·통일 내비, 데모 흐름 |
+| **오효석** | [@ohyoseok92](https://github.com/ohyoseok92) | 3D 엔진 · 보안 | 프리셋·랜드마크 마커 적용, memory-walk 엔진, 보안(Stored XSS 방어) |
+| **김시언** | [@happybluebird](https://github.com/happybluebird) | UI · 데이터 전처리 | 홈·챗봇·퀴즈 UI, TTS 공간음향(HRTF), 지도 UX, RAG 챗봇 연동 |
+| **지경민** | [@jen282](https://github.com/jen282) | 이미지 · 데이터 전처리 | MinerU 이미지·캡션 추출, 스캔 PDF 정제, "서기" 창구 챗봇, 전처리 파이프라인, 인덱싱·라우팅 실험 |
+| **조윤재** | [@liminal-cipher](https://github.com/liminal-cipher) | GraphRAG · 백엔드 | 기획·아키텍처 설계, GraphRAG 백엔드(FastAPI)·라이브 오케스트레이터 구축, 방(K) 자동화·이미지 매칭, Azure Cosmos DB / Blob 기반 상태 영속성 |
+| **김인준** | [@JunK98](https://github.com/JunK98) | GraphRAG | AI 교안 테스트, GraphRAG 검색·요약·쿼리 라우팅, 퀴즈 근거 검증 |
+| **이재모** | [@imjml](https://github.com/imjml) | GraphRAG · 전처리 | OpenCV 이미지 분리·캡션(초기), 인덱싱·퀴즈 실험 |
+
+> 사람별 여정·Git 커밋·소감·타임라인 전체는 **[CONTRIBUTORS.md](CONTRIBUTORS.md)** 참조.
+
+## My Role (조윤재)
+
+| 담당 | 산출물 |
+| --- | --- |
+| GraphRAG 파이프라인·백엔드 | 인덱싱 최종 구성, 라이브 오케스트레이터, 방(K) 자동화·이미지 매칭, 비용 추적. 별도 repo [mind-palace-graphrag](https://github.com/liminal-cipher/mind-palace-graphrag) (259커밋 중 242) |
+| 앱 BFF 영속성 레이어 | 사용자 DB [`backend/app/cosmos.py`](backend/app/cosmos.py), 서재 Blob 하이브리드 [`backend/app/storage.py`](backend/app/storage.py), 퀴즈 결과·연상 장면 저장, 토큰 사용량 집계. 설계 문서 [backend/USER_DB.md](backend/USER_DB.md) |
+| repo 통합 관리 | 팀 PR 24건 리뷰·머지, 데모 모드 온오프, 지역 간 데이터 누수·memory-walk 상태 버그 수정 |
+
 ## Retrospective
 
 - **라이브 인덱싱은 무겁습니다** (GraphRAG 특성). 상태 게이팅과 로딩바로 체감을 눌렀지만, 다시 한다면 사전 인덱싱 캐시와 증분 인덱싱을 먼저 설계할 것입니다.
@@ -224,12 +222,4 @@ AI가 핵심인 서비스인 만큼 6대 원칙을 모두 점검했습니다.
 
 ## Status
 
-완료. 팀 개발 2026-05~06, 문서 정리 2026-07~08. 라이브 데모는 Azure 구독이 유지되는 동안 접속 가능합니다.
-
----
-
-<div align="center">
-
-**자료의 의미 구조를, 걸을 수 있는 공간으로.**
-
-</div>
+완료. 팀 개발 2026년 5월부터 6월, 문서 정리 7월부터 8월. 라이브 데모는 Azure 구독이 유지되는 동안 접속 가능합니다.

@@ -108,7 +108,17 @@ Microsoft AI School 9기 3차 프로젝트 · 팀 고민중독 (7인) · 2026.05
 - **2D 설계도 · 3D 워크스루 · 간격 복습 · 챗봇·퀴즈**를 한 흐름으로.
 - 접근성: Azure 음성 + **공간음향(HRTF)**, 읽기 속도·글자 크기·테마, 저사양 모드.
 
-### 5. repo 구조
+### 5. 스택
+
+| 계층 | 구성 |
+| --- | --- |
+| AI·LLM | Azure OpenAI (gpt-4.1-mini 인덱싱·질의 · GPT-4.1 비전 명명) · text-embedding-3-small · Microsoft GraphRAG · BGE-M3 |
+| 문서 전처리 | PyMuPDF · Azure Content Understanding · PaddleOCR + Ko-pii(이중 마스킹) · DocLayout-YOLO |
+| 3D·프론트 | Three.js (GLTFLoader+DRACO) · VWorld 3D 지도 · 카카오맵 Geocoding · Azure AI Vision(방 스캐너) · Vite |
+| 음성·접근성 | Azure Speech (TTS/STT) · 공간음향(HRTF) |
+| 백엔드·인프라 | FastAPI BFF · Azure Cosmos DB · Blob Storage · Azure App Service · Azure Safety Filter |
+
+### 6. repo 구조
 
 ```
 mind-palace/  (팀 정본: PhrenO0/Mindpalace_Microsoft9ai_Thirdprj-)
@@ -135,13 +145,6 @@ mind-palace/  (팀 정본: PhrenO0/Mindpalace_Microsoft9ai_Thirdprj-)
 | RAG 라우팅 | **BGE-M3 쿼리 라우터** | 요약·비교 질문은 community report(global), 특정 개념 질문은 entities+relationships(local)로 가야 한다. 라우팅이 어긋나면 자료에 있는데도 답을 못 받는다. global↔local 폴백과 '근거 없으면 거절'을 함께 둔다 |
 | 3D 지도 | **VWorld 국가 3D 지도** | 국가 단위 실제 건물 타일을 그대로 쓸 수 있어 장소법의 '실재하는 장소' 감각이 살아난다. 다만 지역마다 정밀도가 달라 엔진 기본 최적화를 두면 건물이 사라져, 디테일을 낮추고 안정성을 택했다 |
 | 상태 저장 | **Cosmos DB + Blob** | 인덱싱이 수 분 걸리는 파이프라인이라 서버가 재시작되면 결과가 사라지면 안 된다. 계정·서재·퀴즈 기록은 Cosmos, 산출물은 Blob으로 분리했다 |
-
-| 그 외 스택 | |
-| --- | --- |
-| 임베딩·PII | text-embedding-3-small · PaddleOCR + Ko-pii(이중 마스킹) |
-| 3D·프론트 | Three.js (GLTFLoader+DRACO) · 카카오맵 Geocoding · Azure AI Vision(방 스캐너) · Vite |
-| 음성·접근성 | Azure Speech(TTS/STT) · 공간음향(HRTF) |
-| 백엔드·인프라 | FastAPI BFF · Azure App Service · Azure Safety Filter |
 
 > 이 repo의 `backend/`는 계정·저장을 담당하는 BFF이다. GraphRAG 인덱싱·오케스트레이터·Palace 생성은 별도 repo [mind-palace-graphrag](https://github.com/liminal-cipher/mind-palace-graphrag)에 있다.
 

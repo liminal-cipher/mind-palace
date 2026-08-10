@@ -1,23 +1,21 @@
-<div align="center">
+# 회랑 (Mind Palace)
 
-# 기억의 궁전 · MIND PALACE
+> 자료의 의미 구조를, 걸어다닐 수 있는 3D 공간으로. Azure AI 기반 공간 기억 학습 서비스.
 
-### 자료의 의미 구조를, 걸어다닐 수 있는 3D 공간으로. Azure AI 기반 공간 기억 학습 서비스 「회랑」
+![Azure](https://img.shields.io/badge/Azure-AI%20Service-0078D4?logo=microsoftazure&logoColor=white)
+![Azure OpenAI](https://img.shields.io/badge/Azure%20OpenAI-412991)
+![GraphRAG](https://img.shields.io/badge/GraphRAG-Microsoft-2088FF)
+![Three.js](https://img.shields.io/badge/Three.js-3D%20Engine-000000?logo=threedotjs&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-Backend-009688?logo=fastapi&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-Frontend-646CFF?logo=vite&logoColor=white)
 
-![Azure](https://img.shields.io/badge/Azure-AI%20Service-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white)
-![Azure OpenAI](https://img.shields.io/badge/Azure%20OpenAI-412991?style=for-the-badge)
-![GraphRAG](https://img.shields.io/badge/GraphRAG-Microsoft-2088FF?style=for-the-badge)
-![Three.js](https://img.shields.io/badge/Three.js-3D%20Engine-000000?style=for-the-badge&logo=threedotjs&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-Backend-009688?style=for-the-badge&logo=fastapi&logoColor=white)
-![Vite](https://img.shields.io/badge/Vite-Frontend-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+Microsoft AI School 9기 3차 프로젝트 · 팀 고민중독
 
-🔗 **[라이브 데모](https://3d-mindpalace-ai-fxf8dyfqega3hvbp.canadacentral-01.azurewebsites.net/)** &nbsp;·&nbsp; **[GraphRAG 파이프라인 repo](https://github.com/liminal-cipher/mind-palace-graphrag)** &nbsp;·&nbsp; `MS AI School 9기 · 3차 프로젝트` &nbsp;·&nbsp; 팀 **고민중독**
-
-</div>
+[라이브 데모](https://3d-mindpalace-ai-fxf8dyfqega3hvbp.canadacentral-01.azurewebsites.net/) · [GraphRAG 파이프라인 repo](https://github.com/liminal-cipher/mind-palace-graphrag)
 
 ## Overview
 
-기억의 궁전(회랑)은 학습 자료(PDF·노트)를 **걸어다닐 수 있는 3D 기억의 궁전**으로 자동 변환하는 Azure AI 기반 공간 기억 학습 서비스입니다.
+회랑은 학습 자료(PDF·노트)를 **걸어다닐 수 있는 3D 기억의 궁전**으로 자동 변환하는 Azure AI 기반 공간 기억 학습 서비스입니다.
 
 사용자가 자료를 올리면, AI가 개념과 관계를 추출해 **GraphRAG 지식그래프**로 구조화하고, 의미가 가까운 개념끼리 '방'으로 묶습니다. 그 방들은 VWorld 3D 지도 위 명소로 떠오르고, 입장하면 가구마다 학습 개념이 배치된 방 내부로 들어갑니다. 사용자는 공간을 **1인칭으로 걸으며 외우고**, 간격 반복으로 복습하며, 챗봇·퀴즈로 근거 기반 확인을 합니다.
 

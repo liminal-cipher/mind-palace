@@ -11,7 +11,7 @@
 ![FastAPI](https://img.shields.io/badge/FastAPI-Backend-009688?style=for-the-badge&logo=fastapi&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-Frontend-646CFF?style=for-the-badge&logo=vite&logoColor=white)
 
-🔗 **[라이브 데모](https://3d-mindpalace-ai-fxf8dyfqega3hvbp.canadacentral-01.azurewebsites.net/)** &nbsp;·&nbsp; `MS AI School 9기 · 3차 프로젝트` &nbsp;·&nbsp; 팀 **고민중독**
+🔗 **[라이브 데모](https://3d-mindpalace-ai-fxf8dyfqega3hvbp.canadacentral-01.azurewebsites.net/)** &nbsp;·&nbsp; **[GraphRAG 파이프라인 repo](https://github.com/liminal-cipher/mind-palace-graphrag)** &nbsp;·&nbsp; `MS AI School 9기 · 3차 프로젝트` &nbsp;·&nbsp; 팀 **고민중독**
 
 </div>
 
@@ -422,7 +422,7 @@
 - 일반 RAG의 약점(흩어진 정보·전체 흐름)을 **개체·관계 지식그래프**로 보완.
 - 인덱싱 4단계: 청킹(TextUnit) → 엔티티·관계 추출 → **Leiden 군집화** → community report. 산출물 6개 `.parquet`.
 - 목차로 방 경계 고정 → 개념을 첫 등장 위치의 방에 배치 → 루브릭 keep/demote → **방 개수(K) 자동화**(작은 방은 옆 방에 합침) → 이미지를 캡션 임베딩 유사도로 매칭.
-- 학습 챗봇 **RAG 라우팅**(global↔local 폴백, 근거 없으면 거절 — 답변 질로 **global 채택, 약 7–8초**), 퀴즈 **2단 검증**.
+- 학습 챗봇 **RAG 라우팅**: **BGE-M3 쿼리 라우터**(`method=auto`)가 질문을 local/global 검색으로 분류, 근거 없으면 거절. 운영에선 답변 질 기준으로 **global 우선 채택(약 7–8초)**. 퀴즈 **2단 검증**(생성→검증 LLM이 근거 확인).
 
 ### ③ 3D 엔진 — 공간
 
@@ -443,11 +443,11 @@
 
 | 영역 | 기술 |
 | --- | --- |
-| **AI · LLM** | Azure OpenAI (GPT-4.1) · text-embedding-3-small · Microsoft **GraphRAG** (Leiden community report) |
+| **AI · LLM** | Azure OpenAI (**gpt-4.1-mini** 인덱싱·질의 / **GPT-4.1** 비전 사물 명명) · text-embedding-3-small · Microsoft **GraphRAG** (Leiden community report) · **BGE-M3** 쿼리 라우팅 |
 | **문서 전처리** | PyMuPDF · Azure Content Understanding · PaddleOCR + Ko-pii(PII) · DocLayout-YOLO |
 | **3D 엔진** | Three.js (GLTFLoader+DRACO) · VWorld 3D 지도 · 카카오맵 Geocoding · Azure AI Vision(스캐너) |
 | **음성·접근성** | Azure Speech(TTS/STT) · 공간음향(HRTF) |
-| **백엔드** | FastAPI · Cosmos/Blob(사용자 격리 저장) |
+| **백엔드** | FastAPI BFF — 계정(Cosmos NoSQL)·서재 저장·퀴즈 기록·토큰 사용량 집계 ※ GraphRAG 인덱싱·오케스트레이터·Palace 생성은 별도 repo [mind-palace-graphrag](https://github.com/liminal-cipher/mind-palace-graphrag) |
 | **프론트엔드** | Vite · Vanilla JS / legacy HTML |
 | **인프라** | Azure App Service · Azure Safety Filter |
 
@@ -456,8 +456,8 @@
 ## 📁 Folder Structure
 
 ```
-Mindpalace_Microsoft9ai_Thirdprj/
-├─ backend/         FastAPI 서버 (app/, main.py, USER_DB.md)
+mind-palace/  (팀 정본: PhrenO0/Mindpalace_Microsoft9ai_Thirdprj-)
+├─ backend/         FastAPI BFF — 계정(Cosmos)·서재 저장·퀴즈 기록·토큰 집계 (app/, main.py, USER_DB.md)
 ├─ frontend/        Vite + src/
 │  └─ public/legacy/  설명 페이지·3D 워크스루(bounding-box-visual)·방 스캐너·memory-walk
 ├─ tools/           fetch_city_photos.py (도시 사진 수집)
@@ -466,6 +466,8 @@ Mindpalace_Microsoft9ai_Thirdprj/
 ├─ CONTRIBUTORS.md  팀 역할·사람별 히스토리
 └─ deploy-build.ps1 / startup.sh / requirements.txt
 ```
+
+> **GraphRAG 인덱싱·라이브 오케스트레이터·Palace 생성 파이프라인**은 별도 저장소 [mind-palace-graphrag](https://github.com/liminal-cipher/mind-palace-graphrag)에 있다. 이 저장소의 `backend/`는 계정·저장을 담당하는 BFF다.
 
 ```bash
 # 백엔드

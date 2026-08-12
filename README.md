@@ -101,7 +101,7 @@ Microsoft AI School 9기 3차 프로젝트 · 팀 고민중독 (7인) · 2026.05
 - 방 내부: GLB 방을 받아 **가구 인식 → AABB 중심 3D 좌표 → 걷는 동선 번호 → 학습 개념 배치(장소법)**.
 - 상세 알고리즘: **[ARCHITECTURE.md](ARCHITECTURE.md)** (좌표계 정규화·검출 게이트·세그멘테이션·삼각측량·동선·카메라).
 
-<img src="https://3d-mindpalace-ai-fxf8dyfqega3hvbp.canadacentral-01.azurewebsites.net/legacy/shots/naming-result.png" alt="자동 명명 결과. 번호·이름·시점 라벨" width="640" />
+<img src="frontend/public/legacy/shots/naming-result.png" alt="자동 명명 결과. 번호·이름·시점 라벨" width="640" />
 
 ### 4. UI/UX · 복습
 

@@ -11,7 +11,7 @@
 
 Microsoft AI School 9기 3차 프로젝트 · 팀 고민중독 (7인) · 2026.05 ~ 06
 
-[라이브 데모](https://3d-mindpalace-ai-fxf8dyfqega3hvbp.canadacentral-01.azurewebsites.net/) · [GraphRAG 파이프라인 repo](https://github.com/liminal-cipher/mind-palace-graphrag)
+[라이브 데모](https://phreno0.github.io/Mindpalace_Microsoft9ai_Thirdprj-/) · [GraphRAG 파이프라인 repo](https://github.com/liminal-cipher/mind-palace-graphrag)
 
 ## Motivation
 

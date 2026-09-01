@@ -78,10 +78,20 @@ Microsoft AI School 9기 3차 프로젝트 · 팀 고민중독 (7인) · 2026.05
 
 업로드 → **전처리 → GraphRAG → 3D 공간 → 복습**, 한 흐름.
 
+#### 시스템 컨텍스트 (Level 1: System Context)
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/img/arch-level-1-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="docs/img/arch-level-1-light.png">
+  <img alt="회랑 시스템 컨텍스트 다이어그램 (Level 1)" src="docs/img/arch-level-1-light.png" width="100%">
+</picture>
+
+#### 서브시스템 및 데이터 파이프라인 (Level 2: Container Architecture)
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/img/arch-level-2-dark.png">
   <source media="(prefers-color-scheme: light)" srcset="docs/img/arch-level-2-light.png">
-  <img alt="회랑 시스템 아키텍처 다이어그램" src="docs/img/arch-level-2-light.png" width="100%">
+  <img alt="회랑 서브시스템 아키텍처 다이어그램 (Level 2)" src="docs/img/arch-level-2-light.png" width="100%">
 </picture>
 
 ### 1. PDF 전처리: 성격에 맞춰 경로 분기

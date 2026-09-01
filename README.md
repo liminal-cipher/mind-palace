@@ -219,13 +219,13 @@ AI가 핵심인 서비스인 만큼 6대 원칙을 모두 점검했다.
 
 | 이름 | GitHub | 담당 | 주요 기여 |
 | --- | --- | --- | --- |
-| **지경민** | [@jen282](https://github.com/jen282) | 이미지 · 데이터 전처리 | MinerU 이미지·캡션 추출, 스캔 PDF 정제, "서기" 창구 챗봇, 전처리 파이프라인, 인덱싱·라우팅 실험 |
-| **이재모** | [@imjml](https://github.com/imjml) | 전처리 · GraphRAG | OpenCV 이미지 분리·캡션(초기), 인덱싱·퀴즈 실험 |
-| **조윤재** | [@liminal-cipher](https://github.com/liminal-cipher) | GraphRAG · 백엔드 | 기획·아키텍처 설계, GraphRAG 백엔드(FastAPI)·라이브 오케스트레이터 구축, 방(K) 자동화·이미지 매칭, Azure Cosmos DB / Blob 기반 상태 영속성 |
-| **김인준** | [@JunK98](https://github.com/JunK98) | GraphRAG | AI 교안 테스트, GraphRAG 검색·요약·쿼리 라우팅, 퀴즈 근거 검증 |
-| **오준상** | [@PhrenO0](https://github.com/PhrenO0) | 3D 엔진 · UI/UX | VWorld 지도·방 입장, GLB 가구 인식·3D 좌표·동선·카메라(memory-walk), 기술 설명 페이지·통일 내비, 데모 흐름 |
-| **오효석** | [@ohyoseok92](https://github.com/ohyoseok92) | 3D 엔진 · 보안 | 프리셋·랜드마크 마커 적용, memory-walk 엔진, 보안(Stored XSS 방어) |
-| **김시언** | [@happybluebird](https://github.com/happybluebird) | UI · 데이터 전처리 | 홈·챗봇·퀴즈 UI, TTS 공간음향(HRTF), 지도 UX, RAG 챗봇 연동 |
+| **조윤재** | [@liminal-cipher](https://github.com/liminal-cipher) | AI 아키텍처 · 백엔드 총괄 | 기획 및 전체 아키텍처 총괄, GraphRAG 백엔드(FastAPI) 및 라이브 오케스트레이터 구축, 방(K) 자동화·이미지 매칭, Azure Cosmos DB / Blob 영속성 |
+| **지경민** | [@jen282](https://github.com/jen282) | 퀴즈 시스템 · PDF 전처리 파이프라인 | 퀴즈 생성기·서버 채점·근거 드로어 전담 개발, 스캔 PDF 정제 및 도표/이미지·캡션 분리 파이프라인 구축, 지도 챗봇 RAG 연동 |
+| **김인준** | [@JunK98](https://github.com/JunK98) | BGE 쿼리 라우팅 · GraphRAG 실험 | BGE-M3 쿼리 라우터(Global vs Local 검색 분기) 모듈 개발, Azure Speech 토큰 API 구축, GraphRAG 인덱싱/청킹(overlap200) 및 룸 설계 실험 |
+| **이재모** | [@imjml](https://github.com/imjml) | 전처리 프로토타입 · 연상 프롬프트 | 초기 OpenCV 기반 이미지 분리 프로토타이핑, GraphRAG 인덱싱 실험 및 시각 단서 기반 연상 장면 생성 프롬프트 설계 |
+| **김시언** | [@happybluebird](https://github.com/happybluebird) | UI/UX · 3D 공간음향 | 초기 전처리/목차 추출 설계, 홈/랜딩 인터랙션, 인룸 퀴즈/챗봇 UI, HRTF 3D 공간음향 시스템 구축 |
+| **오준상** | [@PhrenO0](https://github.com/PhrenO0) | 3D 공간 엔진 · UI/UX | 3D 공간 엔진(memory-walk), VWorld 지도·방 입장, GLB 가구 인식·동선·카메라 알고리즘, 기술 설명 페이지 일습 |
+| **오효석** | [@ohyoseok92](https://github.com/ohyoseok92) | 3D 에셋 · 시스템 보안 | 3D 방 에셋/프리셋 확보 및 렌더링 성능 최적화, 파일 업로드 보안 전수 방어(Zip Bomb, SSRF, XSS) |
 
 > 사람별 여정·Git 커밋·소감·타임라인 전체는 **[CONTRIBUTORS.md](CONTRIBUTORS.md)** 참조.
 

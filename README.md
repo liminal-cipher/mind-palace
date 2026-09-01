@@ -76,10 +76,10 @@ Microsoft AI School 9기 3차 프로젝트 · 팀 고민중독 (7인) · 2026.05
 
 ### Architecture
 
-본 서비스는 **데이터 전처리 → 지식 구조화(GraphRAG) → 3D 공간 렌더링 → 사용자 학습(복습/챗봇)** 의 4단계 핵심 파이프라인으로 동작합니다. 전체 시스템의 구조를 C4 모델(Context, Container, Component)을 기반으로 상세히 안내합니다.
+본 서비스는 **데이터 전처리 → 지식 구조화(GraphRAG) → 3D 공간 렌더링 → 사용자 학습(복습/챗봇)** 의 4단계 핵심 파이프라인으로 동작한다. 전체 시스템의 구조를 C4 모델(Context, Container, Component)을 기반으로 상세히 안내한다.
 
 #### Level 1: System Context
-전체 사용자와 외부 연동 시스템(Azure OpenAI, VWorld 등) 간의 거시적인 데이터 흐름입니다.
+전체 사용자와 외부 연동 시스템(Azure OpenAI, VWorld 등) 간의 거시적인 데이터 흐름이다.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/img/arch-level-1-dark.png">
@@ -87,7 +87,7 @@ Microsoft AI School 9기 3차 프로젝트 · 팀 고민중독 (7인) · 2026.05
 </picture>
 
 #### Level 2: Container Architecture
-프론트엔드, 백엔드(FastAPI), GraphRAG 엔진, 그리고 데이터베이스(Cosmos DB, Blob) 간의 역할과 통신 구조입니다.
+프론트엔드, 백엔드(FastAPI), GraphRAG 엔진, 그리고 데이터베이스(Cosmos DB, Blob) 간의 역할과 통신 구조다.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/img/arch-level-2-dark.png">
@@ -95,7 +95,7 @@ Microsoft AI School 9기 3차 프로젝트 · 팀 고민중독 (7인) · 2026.05
 </picture>
 
 #### Level 3: Component Architecture
-백엔드 내부의 오케스트레이션 과정과 GraphRAG 인덱싱, 3D 렌더링을 담당하는 핵심 모듈들의 상호작용입니다.
+백엔드 내부의 오케스트레이션 과정과 GraphRAG 인덱싱, 3D 렌더링을 담당하는 핵심 모듈들의 상호작용이다.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/img/arch-level-3-dark.png">

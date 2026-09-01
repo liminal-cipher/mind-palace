@@ -74,33 +74,35 @@ Microsoft AI School 9기 3차 프로젝트 · 팀 고민중독 (7인) · 2026.05
 전체 화면 33장(상호작용 상태 포함)과 화면별 의도는 **[docs/GALLERY.md](docs/GALLERY.md)** 에 있다.
 인터랙티브 기술 설명: [`/legacy/bounding-box-visual.html`](frontend/public/legacy/bounding-box-visual.html)(3D 워크스루 10스텝) · [`/legacy/how-it-all-works.html`](frontend/public/legacy/how-it-all-works.html)(글) · [`/legacy/pipeline-overview.html`](frontend/public/legacy/pipeline-overview.html)(한 장 요약)
 
-## Architecture
+### Architecture
 
-업로드 → **전처리 → GraphRAG → 3D 공간 → 복습**, 한 흐름.
+본 서비스는 **데이터 전처리 → 지식 구조화(GraphRAG) → 3D 공간 렌더링 → 사용자 학습(복습/챗봇)** 의 4단계 핵심 파이프라인으로 동작합니다. 전체 시스템의 구조를 C4 모델(Context, Container, Component)을 기반으로 상세히 안내합니다.
 
-#### 시스템 컨텍스트 (Level 1: System Context)
+#### Level 1: System Context
+전체 사용자와 외부 연동 시스템(Azure OpenAI, VWorld 등) 간의 거시적인 데이터 흐름입니다.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/img/arch-level-1-dark.png">
-  <source media="(prefers-color-scheme: light)" srcset="docs/img/arch-level-1-light.png">
-  <img alt="회랑 시스템 컨텍스트 다이어그램 (Level 1)" src="docs/img/arch-level-1-light.png" width="100%">
+  <img alt="회랑 시스템 컨텍스트 다이어그램(Level 1)" src="docs/img/arch-level-1-light.png" width="100%">
 </picture>
 
-#### 서브시스템 및 데이터 파이프라인 (Level 2: Container Architecture)
+#### Level 2: Container Architecture
+프론트엔드, 백엔드(FastAPI), GraphRAG 엔진, 그리고 데이터베이스(Cosmos DB, Blob) 간의 역할과 통신 구조입니다.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/img/arch-level-2-dark.png">
-  <source media="(prefers-color-scheme: light)" srcset="docs/img/arch-level-2-light.png">
-  <img alt="회랑 서브시스템 아키텍처 다이어그램 (Level 2)" src="docs/img/arch-level-2-light.png" width="100%">
+  <img alt="회랑 서브시스템 아키텍처 다이어그램(Level 2)" src="docs/img/arch-level-2-light.png" width="100%">
 </picture>
 
-### 1. PDF 전처리: 성격에 맞춰 경로 분기
+#### Level 3: Component Architecture
+백엔드 내부의 오케스트레이션 과정과 GraphRAG 인덱싱, 3D 렌더링을 담당하는 핵심 모듈들의 상호작용입니다.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/img/arch-level-3-dark.png">
-  <source media="(prefers-color-scheme: light)" srcset="docs/img/arch-level-3-light.png">
-  <img alt="PDF 전처리 및 인제스천 세부 아키텍처" src="docs/img/arch-level-3-light.png" width="100%">
+  <img alt="PDF 전처리·문제출제 내부 아키텍처" src="docs/img/arch-level-3-light.png" width="100%">
 </picture>
+
+### 1. PDF 전처리 : 성격에 맞춰 경로 분기
 
 | 갈래 | 처리 | 비고 |
 | --- | --- | --- |

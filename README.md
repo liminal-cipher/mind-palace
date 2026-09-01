@@ -200,7 +200,7 @@ cd frontend && npm install && npm run dev
 # 배포: Azure App Service (deploy-build.ps1)
 ```
 
-GraphRAG 인덱싱과 Palace 생성은 이 repo에 없다. [mind-palace-graphrag](https://github.com/liminal-cipher/mind-palace-graphrag)의 실행 방법을 따로 참고하세요.
+GraphRAG 인덱싱과 Palace 생성은 본 repo에 없다. [mind-palace-graphrag](https://github.com/liminal-cipher/mind-palace-graphrag)의 실행 방법을 별도로 참조.
 
 ## Responsible AI
 

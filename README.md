@@ -9,7 +9,7 @@
 ![FastAPI](https://img.shields.io/badge/FastAPI-Backend-009688?logo=fastapi&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-Frontend-646CFF?logo=vite&logoColor=white)
 
-Microsoft AI School 9기 3차 프로젝트 · 팀 고민중독 (7인) · 2026.05 ~ 06
+Microsoft AI School 9기 3차 프로젝트 · 팀 고민중독 (7인) · 2026.05.19 ~ 2026.06.25
 
 [라이브 데모](https://phreno0.github.io/Mindpalace_Microsoft9ai_Thirdprj-/) · [GraphRAG 파이프라인 repo](https://github.com/liminal-cipher/mind-palace-graphrag)
 
@@ -249,4 +249,4 @@ AI가 핵심인 서비스인 만큼 6대 원칙을 모두 점검했다.
 
 ## Status
 
-완료. Microsoft AI School 9기 3차 프로젝트로 2026.05 ~ 06 진행. 포트폴리오 데모는 GitHub Pages에서 접속 가능하다. 마지막 갱신 2026-09-13.
+완료. Microsoft AI School 9기 3차 프로젝트로 2026.05.19 ~ 2026.06.25 진행. 포트폴리오 데모는 GitHub Pages에서 접속 가능하다. 마지막 갱신 2026-09-21.

@@ -7,7 +7,7 @@
   var LS_THEME = "mp_theme", LS_ZOOM = "mp_zoom", LS_LITE = "mp_lite", LS_OPEN = "mp_asst_open";
 
   // ── 음성(시각 접근성): 토큰 엔드포인트 기본값 + TTS/STT 엔진 자동 주입(모든 페이지 공통) ──
-  // 페이지에서 window.MP_TTS_TOKEN_URL 을 미리 지정했다면 그대로 둔다(예: home.html).
+  // 페이지에서 window.MP_TTS_TOKEN_URL을 미리 지정했다면 그대로 둔다(예: home.html).
   if (!window.MP_TTS_TOKEN_URL) {
     window.MP_TTS_TOKEN_URL = "https://3d-mindpalace-ai-backend-h3gze8h7hfhqg3h8.canadacentral-01.azurewebsites.net/api/speech-token";
   }
@@ -244,7 +244,7 @@
     }
 
     // ── OpenAI 연결 지점 ──
-    //   추후 실제 OpenAI 연결: window.mpAssistantAsk(text, ctx) 를 정의(async, {text, chips?} 반환)하면 우선 사용.
+    //   추후 실제 OpenAI 연결: window.mpAssistantAsk(text, ctx)를 정의(async, {text, chips?} 반환)하면 우선 사용.
     //   보안상 백엔드 프록시(예: POST /api/chat)로 호출 권장(키 노출 금지). 테마·이동 칩은 LLM과 무관하게 항상 동작하는 '도구'로 유지.
     async function getReply(text){
       if (typeof window.mpAssistantAsk === "function"){

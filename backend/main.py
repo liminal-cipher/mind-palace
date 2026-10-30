@@ -325,7 +325,7 @@ def require_login(request: Request) -> str:
     """로그인 사용자 식별값을 반환. 익명(신원 헤더 없음)이면 401 → 서재 전용 게이트.
     우선순위: 서명된 principal 클레임 > NAME 헤더.
 
-    경고: 이 헤더들의 '신뢰'는 App Service Easy Auth 와 컨테이너 직접 노출 차단에서
+    경고: 이 헤더들의 '신뢰'는 App Service Easy Auth와 컨테이너 직접 노출 차단에서
     나온다. Easy Auth(미인증 허용 모드)는 켜두되, 컨테이너가 외부에 직접 노출되지
     않도록 해야 클라이언트가 신원 헤더를 위조하지 못한다."""
     uid = _principal_user_id(request)

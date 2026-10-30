@@ -44,7 +44,7 @@ jobs:
           cp requirements.txt startup.sh package/
           # legacy/public/data 에 cities가 있으면 legacy/data 로 정규화(vworld_map은 legacy/data 사용)
           if [ ! -f package/frontend/public/legacy/data/cities.json ] && [ -f package/frontend/public/legacy/public/data/cities.json ]; then
-            echo "Normalizing nested legacy/public/data into legacy/data"
+            echo "Normalising nested legacy/public/data into legacy/data"
             mkdir -p package/frontend/public/legacy/data
             cp -r package/frontend/public/legacy/public/data/. package/frontend/public/legacy/data/
           fi

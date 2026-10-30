@@ -213,7 +213,7 @@
       <a class="dl" href="glb-customizer.html"><span class="di">🧩</span> 방 GLB 커스터마이즈</a>
     </div>
     <script>
-      /* 데모 프리셋(스위치 ON): 한국사 샘플을 'mp_demo_palace' 에 캐시하고 'mp_demo=1' 스위치만 켠다.
+      /* 데모 프리셋(스위치 ON): 한국사 샘플을 'mp_demo_palace'에 캐시하고 'mp_demo=1' 스위치만 켠다.
          데모는 실제 자료(mp_palace:*)를 건드리지 않는 별도 오버레이 — 좌하단 배지로 언제든 끄면 원래
          상태로 복귀. 특정 지역(종로) 강제 X: 사용자가 아래 도시 카드/지도/추천으로 직접 고른다. */
       (function () {
@@ -498,7 +498,7 @@
   // ── AI 추천(업로드 내용 ↔ 도시 매칭, 규칙기반) ──
   function palaceCorpus(){
     try{
-      // 데모 ON 이면 데모(한국사) 오버레이를, 아니면 업로드 staging(mp_palace)을 코퍼스로.
+      // 데모 ON이면 데모(한국사) 오버레이를, 아니면 업로드 staging(mp_palace)을 코퍼스로.
       const demoOn = (function(){ try{ return localStorage.getItem("mp_demo")==="1"; }catch(_){ return false; } })();
       const sp = demoOn
         ? (localStorage.getItem("mp_demo_palace") || sessionStorage.getItem("mp_demo_palace"))

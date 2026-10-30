@@ -19,11 +19,11 @@ Microsoft AI School 9기 3차 프로젝트 · 팀 고민중독 (7인) · 2026.05
 
 `제32조 제1항`, `임진왜란 1592`, `영단어 37개`처럼 평면적인 목록에는 위치 정보가 없어 인출 단서가 빈약하다. 방대한 분량을 통째로 외워야 하는 학습(수험·자격증·전문 용어)일수록 단순 반복은 비효율적이고, 이것은 **의지의 문제가 아니라 방법의 문제**이다.
 
-**기억의 궁전(method of loci)** 은 정보에 '위치'를 부여해 경로를 따라 회상하는 고전 기억술이다. 효과는 신경과학으로 입증됐지만 정작 쓰기 어렵다. 효과를 보려면 **분류 → 단서화 → 배치 → 반복**을 사용자가 직접 설계해야 하고, 이 설계 자체가 또 하나의 공부이기 때문이다. 설계 부담, 진입 장벽, 위치 정보가 없는 평면 자료, 복습 관리의 어려움이 겹쳐 있다.
+**기억의 궁전(method of loci)은** 정보에 '위치'를 부여해 경로를 따라 회상하는 고전 기억술이다. 효과는 신경과학으로 입증됐지만 정작 쓰기 어렵다. 효과를 보려면 **분류 → 단서화 → 배치 → 반복**을 사용자가 직접 설계해야 하고, 이 설계 자체가 또 하나의 공부이기 때문이다. 설계 부담, 진입 장벽, 위치 정보가 없는 평면 자료, 복습 관리의 어려움이 겹쳐 있다.
 
 > **회랑의 약속:** 암기를 대신 해주지는 않는다. 대신 **궁전 설계의 부담을 AI가 진다.** 사용자는 외우고 복습하는 데만 집중한다.
 
-핵심은 "AI가 궁전을 만든다"가 아니라 **"공간 구조 자체가 개념의 의미 구조에서 나온다"** 는 데 있다. 방의 경계도, 개념의 배치도 자료를 읽어 만든 구조에서 파생된다.
+핵심은 "AI가 궁전을 만든다"가 아니라 **"공간 구조 자체가 개념의 의미 구조에서 나온다"는** 데 있다. 방의 경계도, 개념의 배치도 자료를 읽어 만든 구조에서 파생된다.
 
 ### Why Spatial Memory Works
 
@@ -71,14 +71,14 @@ Microsoft AI School 9기 3차 프로젝트 · 팀 고민중독 (7인) · 2026.05
 **챗봇 RAG 답변**: 한국사 근거로 답하고, 근거가 없으면 거절한다.
 ![챗봇 답변](docs/ui/33-assistant-answer.png)
 
-전체 화면 33장(상호작용 상태 포함)과 화면별 의도는 **[docs/GALLERY.md](docs/GALLERY.md)** 에 있다.
+전체 화면 33장(상호작용 상태 포함)과 화면별 의도는 **[docs/GALLERY.md](docs/GALLERY.md)에** 있다.
 인터랙티브 기술 설명: [`/legacy/bounding-box-visual.html`](frontend/public/legacy/bounding-box-visual.html)(3D 워크스루 10스텝) · [`/legacy/how-it-all-works.html`](frontend/public/legacy/how-it-all-works.html)(글) · [`/legacy/pipeline-overview.html`](frontend/public/legacy/pipeline-overview.html)(한 장 요약)
 
-### Architecture
+## Architecture
 
-전체 시스템은 **데이터 전처리 → 지식 구조화(GraphRAG) → 3D 공간 렌더링 → 사용자 학습(복습/챗봇)** 의 4단계 핵심 파이프라인으로 구성된다. 아래는 C4 모델을 기반으로 도식화한 아키텍처 다이어그램이다.
+전체 시스템은 **데이터 전처리 → 지식 구조화(GraphRAG) → 3D 공간 렌더링 → 사용자 학습(복습/챗봇)의** 4단계 핵심 파이프라인으로 구성된다. 아래는 C4 모델을 기반으로 도식화한 아키텍처 다이어그램이다.
 
-#### Level 1: System Context
+### Level 1: System Context
 전체 사용자와 외부 연동 시스템(Azure OpenAI, VWorld 등) 간의 거시적인 데이터 흐름이다.
 
 <picture>
@@ -86,7 +86,7 @@ Microsoft AI School 9기 3차 프로젝트 · 팀 고민중독 (7인) · 2026.05
   <img alt="회랑 시스템 컨텍스트 다이어그램(Level 1)" src="docs/img/arch-level-1-light.png" width="100%">
 </picture>
 
-#### Level 2: Container Architecture
+### Level 2: Container Architecture
 프론트엔드, 백엔드(FastAPI), GraphRAG 엔진, 그리고 데이터베이스(Cosmos DB, Blob) 간의 역할과 통신 구조다.
 
 <picture>
@@ -94,7 +94,7 @@ Microsoft AI School 9기 3차 프로젝트 · 팀 고민중독 (7인) · 2026.05
   <img alt="회랑 서브시스템 아키텍처 다이어그램(Level 2)" src="docs/img/arch-level-2-light.png" width="100%">
 </picture>
 
-#### Level 3: Component Architecture
+### Level 3: Component Architecture
 백엔드 내부의 오케스트레이션 과정과 GraphRAG 인덱싱, 3D 렌더링을 담당하는 핵심 모듈들의 상호작용이다.
 
 <picture>

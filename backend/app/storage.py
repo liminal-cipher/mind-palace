@@ -4,19 +4,19 @@
 
 레이아웃:
     - 항목 메타(제목·날짜·방 개수·payload 포인터)는 Cosmos `library` 컨테이너(cosmos.py).
-    - 무거운 palace/designs JSON 은 Blob 의 전용 "library" 컨테이너(3D GLB 의 "models" 와 분리):
+    - 무거운 palace/designs JSON은 Blob의 전용 "library" 컨테이너(3D GLB의 "models"와 분리):
         library: users/<userId>/items/<itemId>.palace.json
         library: users/<userId>/items/<itemId>.designs.json
-      Cosmos 문서 1건 2MB 한도를 피하려고 payload 는 Blob 에 두고 메타엔 경로만 남긴다.
-      컨테이너는 첫 사용 시 자동 생성. 이름은 LIBRARY_BLOB_CONTAINER 로 바꿀 수 있다(기본 library).
+      Cosmos 문서 1건 2MB 한도를 피하려고 payload는 Blob에 두고 메타엔 경로만 남긴다.
+      컨테이너는 첫 사용 시 자동 생성. 이름은 LIBRARY_BLOB_CONTAINER로 바꿀 수 있다(기본 library).
       계정은 AZURE_APP_STORAGE_CONNECTION_STRING(앱과 같은 리전 권장)을 쓰고, 없으면
-      GLB 와 같은 AZURE_STORAGE_CONNECTION_STRING 을 재사용한다(단일 계정 setup 하위호환).
-    - Blob 미설정이면 palace/designs 를 메타 문서에 인라인 저장(작은 궁전만 안전, 2MB 미만).
+      GLB와 같은 AZURE_STORAGE_CONNECTION_STRING을 재사용한다(단일 계정 setup 하위호환).
+    - Blob 미설정이면 palace/designs를 메타 문서에 인라인 저장(작은 궁전만 안전, 2MB 미만).
 
-userId 는 Easy Auth 가 넘기는 이메일. 익명은 라우터(require_login)에서 401 로 막으므로 여기 도달하지 않는다.
+userId는 Easy Auth가 넘기는 이메일. 익명은 라우터(require_login)에서 401로 막으므로 여기 도달하지 않는다.
 
-저장의 원천(source of truth)은 Cosmos 다 → configured() 는 Cosmos 설정 여부를 본다.
-Cosmos 미설정이면 모든 함수가 None/빈 결과를 반환하고 라우터가 503 으로 안내한다.
+저장의 원천(source of truth)은 Cosmos다 → configured()는 Cosmos 설정 여부를 본다.
+Cosmos 미설정이면 모든 함수가 None/빈 결과를 반환하고 라우터가 503으로 안내한다.
 """
 from __future__ import annotations
 
@@ -29,7 +29,7 @@ from typing import Any
 
 from . import cosmos
 
-# 서재 payload 전용 컨테이너(3D GLB 의 "models" 와 분리). 첫 사용 시 자동 생성.
+# 서재 payload 전용 컨테이너(3D GLB의 "models"와 분리). 첫 사용 시 자동 생성.
 CONTAINER = os.getenv("LIBRARY_BLOB_CONTAINER", "library")
 PREFIX = "users"
 
@@ -129,7 +129,7 @@ def _delete_blob(container, blob_name: str) -> None:
 # ── 공개 API (라우터가 호출) ─────────────────────────────────────────────────
 
 def list_items(user_id: str) -> list[dict]:
-    """목록용 메타 배열(최신순). 없으면 빈 배열. mypage 는 {id,title,savedAt,rooms} 를 쓴다."""
+    """목록용 메타 배열(최신순). 없으면 빈 배열. mypage는 {id,title,savedAt,rooms} 를 쓴다."""
     metas = cosmos.list_item_metas(user_id)
     return [
         {
@@ -143,7 +143,7 @@ def list_items(user_id: str) -> list[dict]:
 
 
 def get_item(user_id: str, item_id: str) -> dict | None:
-    """전체 항목(palace 포함). 없으면 None. payload 는 Blob 포인터면 Blob 에서 읽어 합친다."""
+    """전체 항목(palace 포함). 없으면 None. payload는 Blob 포인터면 Blob에서 읽어 합친다."""
     meta = cosmos.get_item_meta(user_id, _safe_id(item_id))
     if meta is None:
         return None
@@ -179,7 +179,7 @@ def save_item(
     item_id: str | None = None,
     edits: Any = None,
 ) -> dict | None:
-    """항목을 저장(없으면 새로, 있으면 덮어씀). 무거운 payload 는 Blob, 메타는 Cosmos.
+    """항목을 저장(없으면 새로, 있으면 덮어씀). 무거운 payload는 Blob, 메타는 Cosmos.
     한 세션 = { palace + designs + edits(노드 순서/추가 오버레이) }.
     (의미부여는 별도 mnemonics 컨테이너에 생성 즉시 저장 — 이 번들엔 포함하지 않는다.)
     목록용 메타 항목을 반환. Cosmos 미설정이면 None."""

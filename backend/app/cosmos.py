@@ -2,14 +2,14 @@
 
 역할 분담(하이브리드):
     - cosmos.py : 작고 쿼리 대상인 메타 — 사용자 프로필 + 서재 항목 메타(+ 포인터).
-    - storage.py: 무거운 payload(palace/designs JSON)를 Azure Blob 에 둔다(2MB 문서 한도 회피).
+    - storage.py: 무거운 payload(palace/designs JSON)를 Azure Blob에 둔다(2MB 문서 한도 회피).
 
 컨테이너(없으면 첫 사용 시 자동 생성):
     users   (pk /id)      : 프로필 1건 = 사용자 1명. id = 이메일(Easy Auth 신원).
     library (pk /userId)  : 항목 메타 1건 = 저장 1건. userId = users.id.
 
-식별 키는 이메일이다(기존 Blob 경로·require_login 과 일치). Entra(Microsoft) 전환 대비로
-oid(Entra object id)는 프로필 속성에 함께 보관해 둔다 — 추후 키를 oid 로 옮길 수 있게.
+식별 키는 이메일이다(기존 Blob 경로·require_login과 일치). Entra(Microsoft) 전환 대비로
+oid(Entra object id)는 프로필 속성에 함께 보관해 둔다 — 추후 키를 oid로 옮길 수 있게.
 
 설정(둘 중 하나):
     AZURE_COSMOS_CONNECTION_STRING            # 권장(연결 문자열 하나)
@@ -19,7 +19,7 @@ oid(Entra object id)는 프로필 속성에 함께 보관해 둔다 — 추후 �
     AZURE_COSMOS_MAX_RU       (기본 1000 — 프로비저닝 오토스케일 상한 RU/s)
     AZURE_COSMOS_SERVERLESS   (true 면 처리량 미지정 — 서버리스 계정용)
 
-미설정이면 configured()=False, 모든 함수가 None/빈 결과를 반환하고 라우터가 503 으로 안내한다.
+미설정이면 configured()=False, 모든 함수가 None/빈 결과를 반환하고 라우터가 503으로 안내한다.
 """
 from __future__ import annotations
 
@@ -35,7 +35,7 @@ DB_NAME = os.getenv("AZURE_COSMOS_DB_NAME", "mindpalace")
 USERS = "users"
 LIBRARY = "library"
 MNEMONICS = "mnemonics"
-# 채점 결과(계정별 퀴즈 기록). graphrag 가 채점하고(정답 보유), 프론트는 점수/오답만 받아
+# 채점 결과(계정별 퀴즈 기록). graphrag가 채점하고(정답 보유), 프론트는 점수/오답만 받아
 # 여기 저장한다(정답 불필요). doc id = quizId(재채점 시 덮어씀), pk /userId.
 QUIZ_RESULTS = "quiz_results"
 # graphrag 워커가 분석 1건마다 쓰는 컨테이너(같은 DB). 우리는 읽기만 한다.
@@ -147,7 +147,7 @@ def _quiz_results():
 
 
 def _usage():
-    # graphrag 가 만든 컨테이너(pk /jobId)와 동일한 파티션 키로 확보(있으면 그대로 사용).
+    # graphrag가 만든 컨테이너(pk /jobId)와 동일한 파티션 키로 확보(있으면 그대로 사용).
     return _container(USAGE, "/jobId")
 
 
@@ -165,7 +165,7 @@ def upsert_user(
 ) -> dict | None:
     """로그인 시 호출. 없으면 생성, 있으면 lastLoginAt/표시정보 갱신. 미설정이면 None.
 
-    멱등(idempotent)이라 매 로그인 호출해도 안전하다. createdAt 은 최초 1회만 박힌다."""
+    멱등(idempotent)이라 매 로그인 호출해도 안전하다. createdAt은 최초 1회만 박힌다."""
     cont = _users()
     if cont is None:
         return None
@@ -190,7 +190,7 @@ def upsert_user(
             doc["oid"] = oid
         doc["provider"] = provider or doc.get("provider") or "microsoft"
         doc["lastLoginAt"] = now
-        doc.setdefault("avatarUrl", "")  # Entra 는 사진 클레임 미제공 → 기본 빈 값.
+        doc.setdefault("avatarUrl", "")  # Entra는 사진 클레임 미제공 → 기본 빈 값.
         cont.upsert_item(doc)
         return doc
     except Exception:
@@ -265,7 +265,7 @@ def delete_item_meta(user_id: str, item_id: str) -> bool:
 # ── 의미부여(mnemonic) — 생성 즉시 저장. 텍스트가 작아 Cosmos 인라인(Blob 불필요). ──
 
 def _mnemo_id(palace_id: str, spot: str, entity: str) -> str:
-    """palaceId:spot:entity 로 안정적(멱등) 문서 id. Cosmos 금지문자(/\\?#) 제거, 길이 제한."""
+    """palaceId:spot:entity로 안정적(멱등) 문서 id. Cosmos 금지문자(/\\?#) 제거, 길이 제한."""
     raw = f"{palace_id or '_'}:{spot or '_'}:{entity or '_'}"
     return re.sub(r"[/\\?#]", "_", raw)[:200]
 
@@ -274,7 +274,7 @@ def upsert_mnemonic(
     user_id: str, palace_id: str, spot: str, entity: str, markdown: str
 ) -> dict | None:
     """의미부여 1건 upsert(덮어쓰기). 같은 (palace,spot,entity)면 같은 id → 재생성 시 갱신.
-    멱등이라 생성 직후 매번 호출해도 안전. createdAt 은 최초 1회만."""
+    멱등이라 생성 직후 매번 호출해도 안전. createdAt은 최초 1회만."""
     cont = _mnemonics()
     if cont is None:
         return None
@@ -346,8 +346,8 @@ def save_quiz_result(
     topic: str = "",
     wrong: list[dict] | None = None,
 ) -> dict | None:
-    """채점 1건 upsert. 같은 quiz_id 는 같은 id → 재채점 시 최신 결과로 갱신(멱등).
-    createdAt 은 최초 1회, gradedAt 은 매번 갱신. wrong=[{question, answerText}] 오답 목록."""
+    """채점 1건 upsert. 같은 quiz_id는 같은 id → 재채점 시 최신 결과로 갱신(멱등).
+    createdAt은 최초 1회, gradedAt은 매번 갱신. wrong=[{question, answerText}] 오답 목록."""
     if not (user_id and quiz_id):
         return None
     cont = _quiz_results()
@@ -412,7 +412,7 @@ def list_quiz_results(user_id: str, palace_id: str | None = None) -> list[dict]:
 # ── AI 토큰 사용량 — 분석(graphrag usage 읽기) + 대화(질의마다 누적). 표시는 토큰만($는 내부). ──
 
 def get_analysis_usage(job_id: str) -> dict | None:
-    """graphrag 가 쓴 분석 usage 문서를 읽는다(같은 DB의 usage 컨테이너). 없으면 None."""
+    """graphrag가 쓴 분석 usage 문서를 읽는다(같은 DB의 usage 컨테이너). 없으면 None."""
     if not job_id:
         return None
     cont = _usage()
@@ -476,7 +476,7 @@ def get_user_usage(user_id: str) -> dict:
 
 
 def track_analysis(user_id: str, job_id: str) -> dict | None:
-    """분석 1건의 토큰을 이 사용자에 귀속(멱등 — 같은 jobId 는 한 번만 더한다).
+    """분석 1건의 토큰을 이 사용자에 귀속(멱등 — 같은 jobId는 한 번만 더한다).
     graphrag usage 문서가 아직 없으면 집계하지 않고 그대로 둔다(다음 호출에서 재시도 가능)."""
     if not (user_id and job_id):
         return None

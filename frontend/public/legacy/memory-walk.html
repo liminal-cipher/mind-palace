@@ -98,7 +98,7 @@
     .card .tts-listen:hover{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent);}
     .card .tts-listen:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
     .card .tts-listen.playing{border-color:var(--gold);color:var(--gold);background:color-mix(in srgb,var(--gold) 14%,transparent);}
-    .card .tts-listen[hidden]{display:none;}   /* display:inline-flex 가 hidden 속성을 덮으므로 명시 */
+    .card .tts-listen[hidden]{display:none;}   /* display:inline-flex가 hidden 속성을 덮으므로 명시 */
     .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
     .card .cardacts{margin-top:14px;display:flex;gap:8px;}
     .card .cact{flex:1;border:1px solid var(--line);border-radius:9px;background:rgba(51,46,40,.05);color:var(--text);font-size:12.5px;font-weight:700;padding:8px 10px;cursor:pointer;transition:border-color .15s,background .15s,color .15s;}
@@ -312,7 +312,7 @@
     </div>
   </aside>
 
-  <!-- ✨ 의미부여(mnemonic): 사물 + 학습 개념 → graphrag /mnemonic 이 만든 기억 장면(마크다운) 렌더 -->
+  <!-- ✨ 의미부여(mnemonic): 사물 + 학습 개념 → graphrag /mnemonic이 만든 기억 장면(마크다운) 렌더 -->
   <div id="mnemoModal" style="display:none;position:fixed;inset:0;z-index:9600;background:rgba(20,16,12,.55);backdrop-filter:blur(3px);">
     <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(560px,92vw);max-height:86vh;overflow:auto;
                 background:#fbf7f1;border-radius:16px;box-shadow:0 18px 60px rgba(0,0,0,.4);font-family:'Pretendard','Malgun Gothic',sans-serif;">
@@ -454,7 +454,7 @@
   </nav>
   <style>
     /* 기본은 '보기·학습' 모드 — 편집 도구(지점·이동·되돌리기·옮기기·삭제)는 숨겨 화면을 단순하게.
-       ✎ 편집을 누르면 body.mw-edit 로 편집 도구가 나타난다(필요할 때만 노출 → 난잡함 완화). */
+       ✎ 편집을 누르면 body.mw-edit로 편집 도구가 나타난다(필요할 때만 노출 → 난잡함 완화). */
     .mw-edit-only { display: none !important; }
     body.mw-edit .mw-edit-only { display: inline-flex !important; }
     body.mw-edit #editToggle { background: var(--accent, #b5552f); color: #fff; }
@@ -595,7 +595,7 @@
       }catch(_){}
       return null;
     }
-    // 데모 모드(스위치): ON 이면 도시 무관 한국사 오버레이(콘텐츠 공개), OFF 면 실제 자료(없으면 빈/잠금).
+    // 데모 모드(스위치): ON이면 도시 무관 한국사 오버레이(콘텐츠 공개), OFF 면 실제 자료(없으면 빈/잠금).
     function mpDemoOn(){ try{ return localStorage.getItem("mp_demo")==="1"; }catch(_){ return false; } }
     function mpDemoStr(){ try{ return localStorage.getItem("mp_demo_palace")||sessionStorage.getItem("mp_demo_palace")||null; }catch(_){ return null; } }
     // 데모는 '구성→입장' 경로로 활성화(mp_demo_entered)됐을 때만 방에 적용 — '전체 보기'(둘러보기) 진입엔 미적용.
@@ -1021,7 +1021,7 @@
     }
     // 이미지: 실제 추출 figure(graphrag deliverables/라이브 잡)만. 못 찾으면 빈 문자열(텍스트만).
     //   ※ concept-photos(제목 매칭 위키/웹 검색)·e.image 등 모든 폴백 제거 — 받은 적 없는(검색된)
-    //     사진이 뜨던 문제 해결. 진짜 figure 가 없는 개념은 이미지 없이 텍스트만 보여준다.
+    //     사진이 뜨던 문제 해결. 진짜 figure가 없는 개념은 이미지 없이 텍스트만 보여준다.
     function entImage(e){ if (!e) return "";
       return _figURL(e) || ""; }
     function entCaption(e){ if (!e) return "";
@@ -1039,7 +1039,7 @@
       }
       const url = P.get("palace") || (THEME && THEME.palace) || null;
       if (!fromUpload && !demoMode && url) { try { palace = await (await fetch(url)).json(); } catch(e){ console.warn("palace 로드 실패, 샘플 사용", e); } }
-      // 데모 ON 이면 한국사 지식을 공개(쇼케이스). 그 외 업로드 자료가 아니면(샘플/테마) 콘텐츠 잠금 —
+      // 데모 ON이면 한국사 지식을 공개(쇼케이스). 그 외 업로드 자료가 아니면(샘플/테마) 콘텐츠 잠금 —
       //   방·가구는 둘러보되 내부 학습 마커·편집은 PDF 분석 후 해금. 데모 OFF + 미업로드면 지식 비노출.
       const _pid = (palace.palace && palace.palace.id) || "";
       CONTENT_LOCKED = !fromUpload && !demoMode && (palace === SAMPLE_PALACE || /korean_history|sample|demo/i.test(_pid) || /korean_history|sample/i.test(url || ""));
@@ -1054,8 +1054,8 @@
         try { const _j = JSON.parse(localStorage.getItem("mp_rag_job") || "null"); MW_IMG_BASE = (_j && _j.base) || ""; MW_JOB_ID = (_j && _j.jobId) || ""; } catch(_) {}
         // 이미지를 mp_rag_job 하나에만 의존하면, 그게 사라지거나(404 정리·재업로드 덮어쓰기)
         // 다른 잡으로 어긋나면 전 방 이미지가 안 뜬다. 라이브 잡은 palace.id == job_id 라,
-        // 로드된 palace 의 id 로 job_id 를 잡는 게 더 견고하고 정확하다(서재서 불러온 저장본도
-        // 이 경로로 가면 graphrag Blob 폴백으로 서빙된다). base 는 mp_rag_job 또는 기본 graphrag 주소.
+        // 로드된 palace의 id로 job_id를 잡는 게 더 견고하고 정확하다(서재서 불러온 저장본도
+        // 이 경로로 가면 graphrag Blob 폴백으로 서빙된다). base는 mp_rag_job 또는 기본 graphrag 주소.
         if (MW_PALACE_ID && !/korean_history|sample|demo/i.test(MW_PALACE_ID)) MW_JOB_ID = MW_PALACE_ID;
         if (!MW_IMG_BASE && MW_JOB_ID) {
           MW_IMG_BASE = window.GRAPHRAG_BASE ||
@@ -1064,9 +1064,9 @@
         }
       }
       // 쇼케이스 데모(korean_history/statistics 등)는 라이브 잡이 아니라 위 fromUpload 배선이
-      // MW_IMG_BASE 를 비워둔다 → deliverables figure 가 안 뜨고 concept-photos(제목 매칭 위키사진)로
-      // 샌다. 쇼케이스면 graphrag base 를 붙여 _figURL 이 /images/{id}/{fn}(deliverables) 의 진짜
-      // 그림을 띄우게 한다(라이브 잡은 MW_JOB_ID 가 이미 잡혀 있어 여기 안 걸림).
+      // MW_IMG_BASE를 비워둔다 → deliverables figure가 안 뜨고 concept-photos(제목 매칭 위키사진)로
+      // 샌다. 쇼케이스면 graphrag base를 붙여 _figURL이 /images/{id}/{fn}(deliverables)의 진짜
+      // 그림을 띄우게 한다(라이브 잡은 MW_JOB_ID가 이미 잡혀 있어 여기 안 걸림).
       if (!MW_IMG_BASE && MW_PALACE_ID && !MW_JOB_ID) {
         MW_IMG_BASE = window.GRAPHRAG_BASE ||
           (function(){ try { return localStorage.getItem("mp_graphrag_base"); } catch(_) { return null; } })() ||
@@ -1275,7 +1275,7 @@
     function buildRoute(entities) {
       if (!anchors.length) { setStatus("이 방에서 가구 앵커를 못 찾았습니다(이름 없는 GLB?)."); return; }
       // 노드 수 보장: 가구 앵커가 학습 항목보다 적으면 보강.
-      //   (구) 빈 바닥 격자에 좌표를 뿌려 "허공/빈 바닥에 마커" 처럼 보이던 문제 →
+      //   (구) 빈 바닥 격자에 좌표를 뿌려 "허공/빈 바닥에 마커"처럼 보이던 문제 →
       //   (신) 검출된 실제 가구 '곁'(방 중심 쪽 0.6~0.9m)에 배치해 자연스럽게. 가구가 0개일 때만 바닥 격자 폴백.
       {
         const need = Math.min(entities.length, 24);
@@ -1329,8 +1329,8 @@
       // ③ 남은 엔티티는 rank 순서 = 동선 순서로 배정(걷는 순서가 곧 서사 순서가 되게).
       //    (기존 타입-친화 배정은 순서를 흩뜨려 1번 개념이 9번 지점에 가는 문제 → 폐기)
       //    단, 사용자 편집본(오버라이드) 활성이면 자동배치하지 않는다 — 저장된 entityId 바인딩이
-      //    곧 완전한 '보임' 셋이라, 미바인딩 kept 를 자유 앵커에 자동배치하면 사용자가 삭제(demote)한
-      //    개념이 되살아난다. 미배치 kept 는 개념 지도 추천에서 다시 ＋연결할 수 있다.
+      //    곧 완전한 '보임' 셋이라, 미바인딩 kept를 자유 앵커에 자동배치하면 사용자가 삭제(demote)한
+      //    개념이 되살아난다. 미배치 kept는 개념 지도 추천에서 다시 ＋연결할 수 있다.
       const freeAnchors = ordered.filter(a => !used.has(a));
       if (!overrideActive) {
         let fi = 0;
@@ -1781,7 +1781,7 @@
         $("cFurn").textContent = `📍 ${dispName(h)}에 배치`;
         setCardImage(entImage(e));   // 실제 추출 figure만 (폴백 없음 — 없으면 이미지 미표시)
         // 카드 본문(cCap)은 개념 내용(summary)으로, 이미지 캡션은 사진 밑(cImgCap)에 작게.
-        // 기존엔 cCap 이 entCaption(이미지 캡션 우선)이라 그림 있는 개념은 내용 대신 사진 캡션이 떴다.
+        // 기존엔 cCap이 entCaption(이미지 캡션 우선)이라 그림 있는 개념은 내용 대신 사진 캡션이 떴다.
         (function(){
           var imgCap=(Array.isArray(e.images)&&e.images[0]&&e.images[0].caption)||"";
           var ic=$("cImgCap"); if(ic){ if(imgCap&&entImage(e)){ic.textContent=imgCap;ic.hidden=false;}else{ic.textContent="";ic.hidden=true;} }
@@ -1818,10 +1818,10 @@
     }
 
     // ── 🔊 엔티티 설명 듣기(시각 접근성) + 입장점 기준 3D 공간음향 ─────────────
-    //   · 음성 안내(assistant.js 의 window.__mpVoiceOn)가 켜져 있을 때만 카드에 버튼 노출.
+    //   · 음성 안내(assistant.js의 window.__mpVoiceOn)가 켜져 있을 때만 카드에 버튼 노출.
     //   · 공간음향 ON → 방 진입 위치·최초 시선 기준으로 엔티티의 좌/우·앞/뒤·위/아래·거리를 계산.
     //   · 재생 중 '■ 읽기 중지', 엔티티 변경/음성 끄기 시 이전 음성 중지(토큰으로 콜백 무효화).
-    //   · 목소리·속도는 mpTTS 의 기존 설정을 그대로 사용. 토큰 엔드포인트도 기존 것 재사용.
+    //   · 목소리·속도는 mpTTS의 기존 설정을 그대로 사용. 토큰 엔드포인트도 기존 것 재사용.
     let _ttsToken = 0, _ttsPlaying = false;
     function ttsAnnounce(msg){ const l = $("cTtsLive"); if (l) l.textContent = msg; }   // 스크린리더 안내(aria-live)
     function spatialForSpot(h){
@@ -2055,7 +2055,7 @@
       if (!palace) { try { const sp=mpCityPalaceStr(MW_CITY); if(sp) palace=JSON.parse(sp); } catch(_){} }
       if(!palace){ warn("저장할 궁전이 없어요. 궁전(방)에 입장한 뒤 다시 시도해 주세요."); return false; }
       try { const sd=localStorage.getItem("studio_designs"); if(sd) designs=JSON.parse(sd); } catch(_){}
-      // 의미부여는 생성 즉시 /api/mnemonic 으로 저장되므로 이 번들엔 담지 않음.
+      // 의미부여는 생성 즉시 /api/mnemonic으로 저장되므로 이 번들엔 담지 않음.
       const edits=_collectLS(k=>k.indexOf("mw_edit:")===0);
       // 저장 id 연속성: 이 궁전을 전에 저장했으면 그 id로 덮어쓰기(중복 방지)
       let existId=null; try { if(MW_PALACE_ID){ existId=(JSON.parse(localStorage.getItem("mp_lib_items")||"{}"))[MW_PALACE_ID]||null; } } catch(_){}
@@ -2201,7 +2201,7 @@
     // 좌측 챗봇의 '의미 매치' 버튼이 호출 — 우상단 ✨의미부여와 동일 기능(활성 마커, 없으면 학습 마커로 이동 후).
     window.mpOpenMnemonic = () => { if (activeIdx < 0 || !route[activeIdx]) { const i = route.findIndex(h => h.entity); goTo(i >= 0 ? i : 0); } openMnemo(); };
 
-    // ── 📝 인룸 퀴즈 — graphrag /quiz/json 로 이 방 학습내용 퀴즈 생성, /quiz/grade 채점, 오답은 마커로 복습 ──
+    // ── 📝 인룸 퀴즈 — graphrag /quiz/json로 이 방 학습내용 퀴즈 생성, /quiz/grade 채점, 오답은 마커로 복습 ──
     let quizData = null, lastQuizTopic = "";
     function quizTopic(){ const t = (window.__mwEntities||[]).map(e=>e&&e.title).filter(Boolean); return t.slice(0,12).join(", ") || (THEME&&THEME.name) || ""; }
     function openQuiz(){ $("quizModal").style.display="block"; renderQuizSetup(); }
@@ -2233,7 +2233,7 @@
       lastQuizTopic = topic;   // 메타 라인(주제 · N문항)에 사용
       $("quizBody").innerHTML = `<div style="color:#7a7066">📝 퀴즈를 만드는 중…</div>`; $("quizActions").innerHTML="";
       let job=null; try { job=JSON.parse(localStorage.getItem("mp_rag_job")||"null"); } catch(_){}
-      // 데모(쇼케이스 콘텐츠)면 진행 중 업로드 잡을 무시하고 데모 스냅샷으로 — PDF 처리 중 데모 입장 시 잡 snapshot 이 404나던 문제.
+      // 데모(쇼케이스 콘텐츠)면 진행 중 업로드 잡을 무시하고 데모 스냅샷으로 — PDF 처리 중 데모 입장 시 잡 snapshot이 404나던 문제.
       const _demo = /korean_history|sample|demo/i.test(MW_PALACE_ID || "");
       const snapshot = (!_demo && job && job.jobId) ? job.jobId : (MW_PALACE_ID || QUIZ_FALLBACK_SNAPSHOT);
       await requestQuiz(snapshot, topic, count, types, false);
@@ -2359,7 +2359,7 @@
         if (isAll){ if (sub) sub.textContent="다시 채점"; saveQuizResult(j); }
       } catch(_){ if (sub) sub.textContent="채점 실패"; } finally { btns.forEach(b=>{ if(b) b.disabled=false; }); }
     }
-    // 채점 결과를 Mindpalace 백엔드(quiz_results)에 저장. 정답은 graphrag 만 알고, 여기엔 점수·오답 문항만.
+    // 채점 결과를 Mindpalace 백엔드(quiz_results)에 저장. 정답은 graphrag만 알고, 여기엔 점수·오답 문항만.
     function saveQuizResult(graded){
       try {
         if (!quizData || !quizData.quiz_id || !graded) return;
@@ -3192,7 +3192,7 @@
     // 관련 개념 칩 → 그 학습 마커로 이동(도우미 답변의 '관련 방' 칩이 호출).
     window.mpGoToHotspot = (i) => { try { goTo(+i); } catch(_){} };
     // 사용량(토큰)을 Mindpalace 백엔드에 누적 — 마이페이지 표시용. 비로그인/실패는 조용히 무시.
-    //   kind: "chat" | "quiz" | "mnemonic". usage 는 graphrag 응답의 {total_tokens, total_cost_usd}.
+    //   kind: "chat" | "quiz" | "mnemonic". usage는 graphrag 응답의 {total_tokens, total_cost_usd}.
     function trackUsage(kind, usage) {
       try {
         const t = usage && usage.total_tokens, c = usage && usage.total_cost_usd;
@@ -3203,14 +3203,14 @@
       } catch(_) {}
     }
 
-    // ── 인룸 RAG 챗봇: 도우미(assistant.js)의 자유 질문을 graphrag /query 로 라우팅 ──
+    // ── 인룸 RAG 챗봇: 도우미(assistant.js)의 자유 질문을 graphrag /query로 라우팅 ──
     //   업로드 PDF(라이브 잡)면 /jobs/{id}/query, 아니면 쇼케이스 /query(snapshot). 답변+관련 개념 칩 반환.
     window.mpAssistantAsk = async (text, ctx) => {
       const q = (text || "").trim(); if (!q) return null;
       let job = null; try { job = JSON.parse(localStorage.getItem("mp_rag_job") || "null"); } catch(_){}
-      // 데모(한국사 등 쇼케이스 콘텐츠)면 진행 중인 업로드 잡을 무시하고 항상 쇼케이스로 — PDF 처리 중 데모로 입장하면 아직 인덱싱 안 된 잡 /query 가 404나던 문제.
+      // 데모(한국사 등 쇼케이스 콘텐츠)면 진행 중인 업로드 잡을 무시하고 항상 쇼케이스로 — PDF 처리 중 데모로 입장하면 아직 인덱싱 안 된 잡 /query가 404나던 문제.
       const _demo = /korean_history|sample|demo/i.test(MW_PALACE_ID || "");
-      // 쇼케이스(데모 스냅샷) 질의 — 항상 고정 백엔드(QUIZ_API)로. 잡 서버 base 로 보내면 /query+snapshot 이 없어 404가 났음(퀴즈 위젯과 동일 이슈).
+      // 쇼케이스(데모 스냅샷) 질의 — 항상 고정 백엔드(QUIZ_API)로. 잡 서버 base로 보내면 /query+snapshot이 없어 404가 났음(퀴즈 위젯과 동일 이슈).
       const showcase = { url: QUIZ_API + "/query", body: { question: q, snapshot: MW_PALACE_ID || "korean_history", method: "local" } };
       // 업로드 PDF(라이브 잡)가 유효하면 그 잡으로 먼저 질의(local 이라야 sources.entities 동반→개념 칩). 데모면 건너뜀.
       const primary = (!_demo && job && job.base && job.jobId && job.done !== false)

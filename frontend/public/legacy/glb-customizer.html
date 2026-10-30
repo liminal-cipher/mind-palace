@@ -68,7 +68,7 @@
   /* ②c 방 미리보기 팝업(내부 4컷 캐러셀) */
   .rp-modal{position:fixed; inset:0; z-index:60; background:rgba(40,34,26,.5); -webkit-backdrop-filter:blur(4px); backdrop-filter:blur(4px);
     display:flex; align-items:center; justify-content:center; padding:20px;}
-  .rp-modal[hidden]{display:none;}  /* hidden 속성이 display:flex 에 덮이던 버그: 미리보기 모달('촬영 중')이 스튜디오 진입 시 항상 떠 무한로딩처럼 보이던 것 수정 */
+  .rp-modal[hidden]{display:none;}  /* hidden 속성이 display:flex에 덮이던 버그: 미리보기 모달('촬영 중')이 스튜디오 진입 시 항상 떠 무한로딩처럼 보이던 것 수정 */
   .rp-box{position:relative; width:min(860px, calc(100vw - 36px)); background:var(--panel2); border:1px solid var(--line);
     border-radius:18px; box-shadow:0 24px 60px rgba(40,34,26,.3); padding:18px 18px 18px 60px; display:flex; gap:16px;}
   .rp-x{position:absolute; top:12px; right:14px; background:none; border:0; font-size:18px; color:var(--muted); cursor:pointer; z-index:2;}
@@ -380,7 +380,7 @@
     }catch(_){}
     return null;
   }
-  // 데모 모드(스위치): ON 이면 도시 무관 한국사 오버레이, OFF 면 실제 자료.
+  // 데모 모드(스위치): ON이면 도시 무관 한국사 오버레이, OFF 면 실제 자료.
   function mpDemoOn(){ try{ return localStorage.getItem("mp_demo")==="1"; }catch(_){ return false; } }
   function mpDemoStr(){ try{ return localStorage.getItem("mp_demo_palace")||sessionStorage.getItem("mp_demo_palace")||null; }catch(_){ return null; } }
   let CITYDATA = null, DESIGNS = [], DESIGN_BLOB = "", PAL = null, THEMES = null, LIB = null;
@@ -864,7 +864,7 @@
     return (uploaded ? Promise.resolve(uploaded) : withTimeout(fetch(themeUrl).then(r=>r.ok?r.json():null), 12000).catch(()=>null)).then(pal => {
       PAL = pal; computeAssign();
       renderList(); renderGallery(); updateLinks();
-      // 구성(compose) 드릴다운에서 넘어온 ?lm/?lmName 이 있으면 그 랜드마크를 미리 선택
+      // 구성(compose) 드릴다운에서 넘어온 ?lm/?lmName이 있으면 그 랜드마크를 미리 선택
       const want = P.get("lm"), wantName = P.get("lmName");
       const pre = (want && regionLms.find(l => l._lmId === want || l.name === want))
                || (wantName && regionLms.find(l => l.name === wantName)) || regionLms[0];

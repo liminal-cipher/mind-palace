@@ -6,11 +6,11 @@
    · Azure 사용 조건:
        1) (자동) Azure Speech JS SDK — 필요 시 CDN 자동 로드
        2) 토큰 엔드포인트(/api/speech-token). 백엔드 주소가 다르면
-          페이지에서 window.MP_TTS_TOKEN_URL 로 절대 URL 지정.
+          페이지에서 window.MP_TTS_TOKEN_URL로 절대 URL 지정.
    사용:  <script src="tts-controls.js" defer></script>
-   음성: graphrag/tts/presets.json 과 동일(SunHi/Hyunsu HD).
-   공간음향: 방 진입 위치·시선 기준 3D 좌표를 Web Audio HRTF PannerNode 로 재생.
-     좌우·앞뒤·위아래와 거리를 반영하며, PannerNode 미지원 시 StereoPanner 로 폴백.
+   음성: graphrag/tts/presets.json과 동일(SunHi/Hyunsu HD).
+   공간음향: 방 진입 위치·시선 기준 3D 좌표를 Web Audio HRTF PannerNode로 재생.
+     좌우·앞뒤·위아래와 거리를 반영하며, PannerNode 미지원 시 StereoPanner로 폴백.
      브라우저 내장 TTS는 PCM 버퍼를 제공하지 않아 공간음향을 적용할 수 없음. */
 (function () {
   "use strict";
@@ -205,7 +205,7 @@
       window.speechSynthesis.speak(u);
     });
   }
-  // 일부 브라우저는 voices 를 비동기로 채움 → 미리 한 번 트리거
+  // 일부 브라우저는 voices를 비동기로 채움 → 미리 한 번 트리거
   if (window.speechSynthesis && typeof window.speechSynthesis.getVoices === "function"){
     window.speechSynthesis.getVoices();
     if (typeof window.speechSynthesis.onvoiceschanged !== "undefined"){

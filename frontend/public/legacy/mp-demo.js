@@ -1,7 +1,7 @@
-/* 데모 모드 표시등(스위치 OFF) — localStorage 'mp_demo'==="1" 이면 모든 페이지 좌하단에 고정 배지로
-   'ON' 을 알리고 '끄기' 버튼을 준다. 데모(한국사 샘플)는 실제 학습자료(mp_palace:*)를 전혀 건드리지
+/* 데모 모드 표시등(스위치 OFF) — localStorage 'mp_demo'==="1"이면 모든 페이지 좌하단에 고정 배지로
+   'ON'을 알리고 '끄기' 버튼을 준다. 데모(한국사 샘플)는 실제 학습자료(mp_palace:*)를 전혀 건드리지
    않는 별도 오버레이라, 끄면 원래 상태(자료 있으면 그 자료, 없으면 빈 상태)로 즉시 복귀(reload)한다.
-   켜기(ON)는 region-select·compose 의 '데모 데이터로 체험하기' 가 담당(mp_demo_palace 캐시 + mp_demo=1).
+   켜기(ON)는 region-select·compose의 '데모 데이터로 체험하기'가 담당(mp_demo_palace 캐시 + mp_demo=1).
    각 페이지에 <script src="mp-demo.js" defer></script> 한 줄로 동작. */
 (function () {
   try {

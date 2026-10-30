@@ -11,7 +11,7 @@
     var job = null;
     try { job = JSON.parse(localStorage.getItem("mp_rag_job") || "null"); } catch (_) {}
     if (!job || !job.jobId || !job.base) return; // 진행 중인 분석 없음
-    // 취소 톰스톤: 이 잡이 '중단됨'으로 표시됐으면 절대 되살리지 않는다(다른 탭/재진입에서도). jobId 가 일치할 때만.
+    // 취소 톰스톤: 이 잡이 '중단됨'으로 표시됐으면 절대 되살리지 않는다(다른 탭/재진입에서도). jobId가 일치할 때만.
     function isCanceled(){ try { return !!(job && job.jobId && localStorage.getItem("mp_rag_canceled") === job.jobId); } catch (_) { return false; } }
     if (isCanceled()) { try { localStorage.removeItem("mp_rag_job"); } catch (_) {} return; }
     if (job.done) { try { window.dispatchEvent(new CustomEvent("mp-rag-ready")); } catch (_) {} return; } // 이미 완료
@@ -123,7 +123,7 @@
     function setLabel(t) { var el = document.getElementById("mpRagLabel"); if (el) el.textContent = t; }
 
     var stopped = false;
-    // 분석 중단: 잡을 '확실히' 버린다 — 폴링 정지 + 톰스톤 기록(다른 탭의 finish/poll 가 되살리지 못하게) +
+    // 분석 중단: 잡을 '확실히' 버린다 — 폴링 정지 + 톰스톤 기록(다른 탭의 finish/poll가 되살리지 못하게) +
     //   도시 귀속 전 전역 staging 정리(palace_ready 직후 취소 대비) + 백엔드 best-effort 취소 + 새로고침으로 잠금 해제.
     function cancel() {
       try { if (!confirm("PDF 분석을 중단할까요?\n진행 중인 분석이 취소되고 지금까지 결과가 사라집니다.")) return; } catch (_) {}
@@ -149,7 +149,7 @@
       var tip = document.getElementById("mpRagTip"); if (tip) tip.innerHTML = '<span class="tw">🎉</span><span>학습 내용이 준비됐어요 — 방에 들어가 확인해 보세요!</span>';
       try { job.done = true; localStorage.setItem("mp_rag_job", JSON.stringify(job)); } catch (_) {}
       // 이 분석이 쓴 토큰을 로그인 사용자에 1회 귀속(서버가 jobId로 멱등 처리 — 중복 안 됨).
-      // 비로그인이면 401 무시. graphrag 가 아니라 Mindpalace 백엔드(/api)로 보낸다.
+      // 비로그인이면 401 무시. graphrag가 아니라 Mindpalace 백엔드(/api)로 보낸다.
       try {
         if (job && job.jobId) {
           fetch("/api/usage/track", {
@@ -169,8 +169,8 @@
       var b = document.getElementById("mpRagBar"); if (b) b.style.background = "#c0463e";
       var ic = document.getElementById("mpRagIc"); if (ic) { ic.textContent = "⚠️"; ic.classList.remove("spin"); }
     }
-    // 잡 기록이 서버에서 사라짐(재시작 등으로 휘발성 var/ 가 날아감). 무한 폴링에 갇히지
-    // 않게 멈추고, mp_rag_job 을 지워 다른 페이지에서 되살아나지 않게 한다(재업로드 안내).
+    // 잡 기록이 서버에서 사라짐(재시작 등으로 휘발성 var/가 날아감). 무한 폴링에 갇히지
+    // 않게 멈추고, mp_rag_job을 지워 다른 페이지에서 되살아나지 않게 한다(재업로드 안내).
     function lost() {
       stopped = true;
       if (tipTimer) clearInterval(tipTimer);

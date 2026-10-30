@@ -32,7 +32,7 @@
 | 필드 | 설명 |
 |---|---|
 | `id` | 항목 id |
-| `userId` | `users.id` 와 동일 (= 파티션 키) |
+| `userId` | `users.id`와 동일 (= 파티션 키) |
 | `title` | 제목 |
 | `roomCount` | 방 개수(마이페이지 통계용) |
 | `savedAt` / `updatedAt` | 저장/수정 시각 |

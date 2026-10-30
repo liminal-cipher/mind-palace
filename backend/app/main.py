@@ -79,7 +79,7 @@ async def security_headers(request: Request, call_next):
     response.headers.setdefault("X-Frame-Options", "SAMEORIGIN")
     response.headers.setdefault("Referrer-Policy", "strict-origin-when-cross-origin")
     response.headers.setdefault("Cross-Origin-Opener-Policy", "same-origin")
-    # HTML·JS 는 매 배포마다 바뀌므로 브라우저가 옛 버전을 '신선'하다고 재사용하지 않게 항상 재검증(no-cache).
+    # HTML·JS는 매 배포마다 바뀌므로 브라우저가 옛 버전을 '신선'하다고 재사용하지 않게 항상 재검증(no-cache).
     # → 배포 후 새로고침만으로 최신 코드를 받는다(ETag로 안 바뀌면 304라 비용도 작음). GLB·이미지 등은 그대로 캐시.
     p = request.url.path.lower()
     if p.endswith(".html") or p.endswith(".js") or p.endswith("/"):
@@ -299,7 +299,7 @@ class RecommendCityRequest(BaseModel):
 )
 def recommend_city(payload: RecommendCityRequest) -> dict:
     """업로드 학습 자료(corpus)에 가장 잘 맞는 도시를 LLM으로 추천.
-    미설정/오류/모호하면 configured 또는 slug=None 으로 신호 → 클라이언트가 규칙기반으로 폴백한다."""
+    미설정/오류/모호하면 configured 또는 slug=None으로 신호 → 클라이언트가 규칙기반으로 폴백한다."""
     cfg = llm_chat_config()
     if not cfg:
         return {"configured": False}
@@ -526,8 +526,8 @@ def pdf_integration_status() -> dict:
 # Easy Auth principal 클레임 중 사용자 식별에 쓸 타입들.
 # 이메일/UPN(도메인 포함)을 먼저 잡고, 그게 전혀 없을 때만 이름으로 폴백한다.
 # (학원 Entra 계정처럼 email 클레임이 없고 name=아이디인 경우라도
-#  preferred_username 의 전체 UPN '아이디@도메인' 을 안정적 식별 키로 쓰기 위함.
-#  과거엔 name 도 이 집합에 섞여 있어, 클레임 배열에서 name 이 preferred_username
+#  preferred_username의 전체 UPN '아이디@도메인'을 안정적 식별 키로 쓰기 위함.
+#  과거엔 name도 이 집합에 섞여 있어, 클레임 배열에서 name이 preferred_username
 #  보다 앞서 오면 도메인 없는 짧은 아이디가 키로 잡히는 문제가 있었다.)
 _EMAIL_CLAIM_TYPES = {
     "emails",
@@ -569,8 +569,8 @@ def _principal_claims(request: Request) -> list[dict]:
 
 def _principal_user_id(request: Request) -> str | None:
     """principal 클레임에서 안정적인 사용자 식별값을 추출. NAME 헤더보다 우선.
-    이메일/UPN 클레임(도메인 포함)을 이름보다 우선해 잡는다 — 클레임 배열에서 name 이
-    preferred_username 보다 앞서 와도 전체 UPN 을 식별 키로 쓰기 위함(짧은 아이디 키 방지)."""
+    이메일/UPN 클레임(도메인 포함)을 이름보다 우선해 잡는다 — 클레임 배열에서 name이
+    preferred_username보다 앞서 와도 전체 UPN을 식별 키로 쓰기 위함(짧은 아이디 키 방지)."""
     claims = _principal_claims(request)
     # 1순위: 이메일/UPN 클레임(전체 도메인 포함).
     for claim in claims:
@@ -590,7 +590,7 @@ def _principal_user_id(request: Request) -> str | None:
 
 
 def _principal_profile(request: Request) -> dict:
-    """프로필 기록용 부가 정보 추출: {displayName, oid}. (이메일은 require_login 이 따로 구함.)"""
+    """프로필 기록용 부가 정보 추출: {displayName, oid}. (이메일은 require_login이 따로 구함.)"""
     display_name = None
     oid = None
     for claim in _principal_claims(request):
@@ -613,7 +613,7 @@ def require_login(request: Request) -> str:
     (지금은 서재 호출마다 1회 point write — 비용 미미. Entra 인증 전환 단계에서 전용
      /api/me 훅으로 옮기는 게 더 깔끔하다.)
 
-    경고: 이 헤더들의 '신뢰'는 App Service Easy Auth 와 컨테이너 직접 노출 차단에서
+    경고: 이 헤더들의 '신뢰'는 App Service Easy Auth와 컨테이너 직접 노출 차단에서
     나온다. Easy Auth(미인증 허용 모드)는 켜두되, 컨테이너가 외부에 직접 노출되지
     않도록 해야 클라이언트가 신원 헤더를 위조하지 못한다."""
     uid = _principal_user_id(request)
@@ -633,7 +633,7 @@ class LibrarySaveRequest(BaseModel):
     designs: Any | None = None
     edits: Any | None = None  # 노드 순서/추가 오버레이 { "mw_edit:<room>": {...}, ... }
     id: str | None = Field(default=None, max_length=64)
-    # (의미부여는 별도 /api/mnemonic 으로 생성 즉시 저장 — 이 번들엔 없음)
+    # (의미부여는 별도 /api/mnemonic으로 생성 즉시 저장 — 이 번들엔 없음)
 
 
 def _reject_oversized_payload(*objects: Any) -> None:
@@ -652,7 +652,7 @@ def _reject_oversized_payload(*objects: Any) -> None:
 
 @app.get("/api/me")
 def me(request: Request, user_id: str = Depends(require_login)) -> dict:
-    """로그인 사용자 프로필(저장된 users 레코드). require_login 이 로그인 시 upsert 하므로
+    """로그인 사용자 프로필(저장된 users 레코드). require_login이 로그인 시 upsert 하므로
     여기선 읽어서 반환만 한다. Cosmos 미설정이면 헤더 클레임만으로 구성해 돌려준다."""
     stored = cosmos.get_user(user_id)
     if stored:
@@ -689,7 +689,7 @@ def usage_me(user_id: str = Depends(require_login)) -> dict:
 @app.post("/api/usage/track")
 def usage_track(payload: UsageTrackRequest, user_id: str = Depends(require_login)) -> dict:
     """프론트가 사용량을 알린다. 갱신된 누적 토큰을 돌려줘 실시간 카운터에 바로 반영하게 한다.
-    - analysis: 잡 완료 시 jobId 로 graphrag usage 를 읽어 1회 집계(멱등 — 중복 안 더함).
+    - analysis: 잡 완료 시 jobId로 graphrag usage를 읽어 1회 집계(멱등 — 중복 안 더함).
     - chat: /query 응답 토큰을 누적."""
     if not cosmos.configured():
         return {"ok": False, "analysisTokens": 0, "activityTokens": 0, "totalTokens": 0}
@@ -819,8 +819,8 @@ def quiz_results_list(
     return {"items": cosmos.list_quiz_results(user_id, palace)}
 
 
-# 마운트된 StaticFiles 는 위 http 미들웨어를 우회한다(Starlette). HTML·JS 는 배포마다 바뀌므로
-# 여기서 직접 Cache-Control:no-cache 를 붙여 브라우저가 옛 코드를 재사용하지 않게 한다(ETag로 미변경 시 304).
+# 마운트된 StaticFiles는 위 http 미들웨어를 우회한다(Starlette). HTML·JS는 배포마다 바뀌므로
+# 여기서 직접 Cache-Control:no-cache를 붙여 브라우저가 옛 코드를 재사용하지 않게 한다(ETag로 미변경 시 304).
 class NoCacheStaticFiles(StaticFiles):
     async def get_response(self, path, scope):
         response = await super().get_response(path, scope)

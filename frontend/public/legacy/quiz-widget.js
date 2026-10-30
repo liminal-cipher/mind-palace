@@ -11,7 +11,7 @@
   function esc2(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;" })[c]; }); }
   function cfg() { return window.mpQuizConfig || {}; }
   // 퀴즈 API 베이스 — graphrag 잡 서버(mp_rag_job.base)를 거치지 않고 고정 백엔드(quiz API)로 보낸다.
-  //   (잡 서버엔 /quiz/json 이 없어 404가 났음. 어떤 자료로 낼지는 snapshot 으로 본문에 전달.)
+  //   (잡 서버엔 /quiz/json이 없어 404가 났음. 어떤 자료로 낼지는 snapshot으로 본문에 전달.)
   //   다른 엔드포인트로 보내려면 window.MP_QUIZ_BASE 지정.
   function quizBase() {
     return cfg().base || window.MP_QUIZ_BASE || "https://3d-mindpalace-ai-backend-h3gze8h7hfhqg3h8.canadacentral-01.azurewebsites.net";
@@ -20,9 +20,9 @@
     if (cfg().snapshot) return cfg().snapshot;
     // 데모(데모 데이터로 체험)면 진행 중 업로드 잡을 무시하고 항상 샘플(korean_history)로 — 처리 중 잡 snapshot 404 방지.
     try { if (localStorage.getItem("mp_palace_demo") === "1") return "korean_history"; } catch (e) {}
-    // 업로드한 PDF(라이브 잡)가 있으면 그 jobId 가 graphrag 스냅샷 키. 없으면 데모(korean_history).
-    //   ?city 는 지도(vworld_map)용 도시 슬러그일 뿐 graphrag 스냅샷이 아니라서 폴백에 쓰지 않는다.
-    //   (jongno 등 미등록 슬러그를 보내면 /quiz/json 이 '스냅샷 없음' 404 를 냈음.)
+    // 업로드한 PDF(라이브 잡)가 있으면 그 jobId가 graphrag 스냅샷 키. 없으면 데모(korean_history).
+    //   ?city는 지도(vworld_map)용 도시 슬러그일 뿐 graphrag 스냅샷이 아니라서 폴백에 쓰지 않는다.
+    //   (jongno 등 미등록 슬러그를 보내면 /quiz/json이 '스냅샷 없음' 404를 냈음.)
     try { var j = JSON.parse(localStorage.getItem("mp_rag_job") || "null"); if (j && j.jobId) return j.jobId; } catch (e) {}
     return "korean_history";
   }
@@ -116,7 +116,7 @@
     });
   }
 
-  // 데모(지도 도시·노드)나 stale 잡 id는 백엔드에 인덱싱돼 있지 않아 /quiz/json 이 404를 낸다.
+  // 데모(지도 도시·노드)나 stale 잡 id는 백엔드에 인덱싱돼 있지 않아 /quiz/json이 404를 낸다.
   // 그때 항상 준비된 샘플 코퍼스로 자동 재시도해 '퀴즈가 생성 안 됨'을 막는다.
   var QUIZ_FALLBACK_SNAPSHOT = "korean_history";
   var quizData = null, lastQuizTopic = "";
@@ -128,7 +128,7 @@
 
   function openQuiz() { ensureDom(); $("quizModal").style.display = "block"; renderQuizSetup(); }
 
-  // 설정 화면 — 주제·문제 수·유형 선택(/quiz/json 의 topic/count/quiz_types). 주제는 자동완성 없이 빈 칸.
+  // 설정 화면 — 주제·문제 수·유형 선택(/quiz/json의 topic/count/quiz_types). 주제는 자동완성 없이 빈 칸.
   function renderQuizSetup() {
     $("quizBody").innerHTML =
       '<div class="qz-setup">' +
@@ -144,8 +144,8 @@
     $("quizBody").querySelectorAll("#qzCount button").forEach(function (b) {
       b.addEventListener("click", function () { $("quizBody").querySelectorAll("#qzCount button").forEach(function (x) { x.classList.toggle("sel", x === b); }); });
     });
-    // 주제 입력 후 Enter 는 '퀴즈 만들기'로 연결(한글 IME 조합 중 Enter 오발 방지: isComposing/keyCode 229 가드).
-    //   stopPropagation 은 모달 레벨 가드(ensureDom)와 중복이지만, Enter 시 generateQuiz 가
+    // 주제 입력 후 Enter는 '퀴즈 만들기'로 연결(한글 IME 조합 중 Enter 오발 방지: isComposing/keyCode 229 가드).
+    //   stopPropagation은 모달 레벨 가드(ensureDom)와 중복이지만, Enter 시 generateQuiz가
     //   입력칸을 즉시 제거해 버블링이 모달까지 못 닿는 경우에도 페이지 단축키로 새지 않게 여기서도 막는다.
     var topicInp = $("qzTopic");
     if (topicInp) topicInp.addEventListener("keydown", function (e) {
@@ -294,7 +294,7 @@
       .catch(function () { if (sub) sub.textContent = "채점 실패"; })
       .then(function () { btns.forEach(function (b) { if (b) b.disabled = false; }); });
   }
-  // 채점 결과를 Mindpalace 백엔드(quiz_results)에 저장. 정답은 graphrag 만 알고, 여기엔 점수·오답 문항만.
+  // 채점 결과를 Mindpalace 백엔드(quiz_results)에 저장. 정답은 graphrag만 알고, 여기엔 점수·오답 문항만.
   function saveQuizResult(graded) {
     try {
       if (!quizData || !quizData.quiz_id || !graded) return;

@@ -42,13 +42,13 @@ MAX_ZIP_ENTRIES = int(os.getenv("SK_MAX_ZIP_ENTRIES", "10000"))  # 엔트리 개
 BLOB_CONTAINER = "models"
 BLOB_IMPORTED_PREFIX = "imported"  # models/imported/<uid>.glb
 
-# BlobServiceClient 는 생성 비용이 있어 프로세스 1회 생성 후 재사용(스레드 안전).
+# BlobServiceClient는 생성 비용이 있어 프로세스 1회 생성 후 재사용(스레드 안전).
 _blob_service_singleton = None
 _blob_service_lock = threading.Lock()
 
 
 def _blob_service_client():
-    """AZURE_STORAGE_CONNECTION_STRING 으로 BlobServiceClient 반환(프로세스 1회 생성·재사용). 없으면 None."""
+    """AZURE_STORAGE_CONNECTION_STRING으로 BlobServiceClient 반환(프로세스 1회 생성·재사용). 없으면 None."""
     global _blob_service_singleton
     conn = (os.getenv("AZURE_STORAGE_CONNECTION_STRING") or "").strip()
     if not conn:
@@ -167,7 +167,7 @@ _TEXTURE_ATTRS = (
 
 
 def _collect_textures(scene) -> list[tuple[Any, str, Any]]:
-    """씬의 모든 재질에서 (material, attr, 원본이미지) 를 1회만 수집한다.
+    """씬의 모든 재질에서 (material, attr, 원본이미지)를 1회만 수집한다.
     압축 루프가 매번 씬을 재순회하지 않도록 하고, 원본을 보관해 반복 축소 시 화질 열화를 막는다."""
     found: list[tuple[Any, str, Any]] = []
     geometries = getattr(scene, "geometry", None) or {}
@@ -315,8 +315,8 @@ def _download_capped(url: str, max_bytes: int, timeout: int = 180) -> bytes:
     return b"".join(chunks)
 
 
-# 같은 uid 를 동시에 가져오면 한 번만 다운로드·변환하도록 uid별 락으로 직렬화한다
-# (두 번째 요청은 첫 번째가 올린 blob 을 그대로 재사용 → Sketchfab 쿼터 보호).
+# 같은 uid를 동시에 가져오면 한 번만 다운로드·변환하도록 uid별 락으로 직렬화한다
+# (두 번째 요청은 첫 번째가 올린 blob을 그대로 재사용 → Sketchfab 쿼터 보호).
 _import_locks: dict[str, threading.Lock] = {}
 _import_locks_guard = threading.Lock()
 
@@ -331,7 +331,7 @@ def _import_lock(uid: str) -> threading.Lock:
 
 
 def _existing_blob_url(blob_name: str) -> str | None:
-    """이미 변환·업로드된 GLB 가 있으면 그 URL 을 반환(중복 다운로드·변환 방지). 없으면 None."""
+    """이미 변환·업로드된 GLB가 있으면 그 URL을 반환(중복 다운로드·변환 방지). 없으면 None."""
     client = _blob_service_client()
     if client is None:
         return None
@@ -346,11 +346,11 @@ def _existing_blob_url(blob_name: str) -> str | None:
 
 def import_model(uid: str, out_dir: Path, max_bytes: int = MAX_BYTES_DEFAULT) -> dict[str, Any]:
     """모델을 받아 단일 GLB(텍스처 ≤1k, 필요시 추가 압축)로 변환.
-    Azure Blob Storage가 설정돼 있으면 models/imported/<uid>.glb 에 업로드하고 blob URL 반환.
-    미설정이면 out_dir/<uid>.glb 에 로컬 저장.
+    Azure Blob Storage가 설정돼 있으면 models/imported/<uid>.glb에 업로드하고 blob URL 반환.
+    미설정이면 out_dir/<uid>.glb에 로컬 저장.
 
-    같은 uid 동시/반복 요청은 uid별 락으로 직렬화하고, 이미 올라간 blob 이 있으면
-    재다운로드 없이 그 URL 을 돌려준다(중복 import 방어).
+    같은 uid 동시/반복 요청은 uid별 락으로 직렬화하고, 이미 올라간 blob이 있으면
+    재다운로드 없이 그 URL을 돌려준다(중복 import 방어).
 
     반환: {originalMB, finalMB, compressed, textureCap, blobUrl(blob 업로드 시)}
           또는 캐시 히트 시 {cached: True, blobUrl}.
@@ -412,7 +412,7 @@ def import_model(uid: str, out_dir: Path, max_bytes: int = MAX_BYTES_DEFAULT) ->
 
 def save_hotspots(uid: str, name: str | None, hotspots: list[dict], out_dir: Path) -> str:
     """스캐너가 만든 핫스팟(노드)을 memory-walk가 fetch할 수 있는 JSON으로 저장.
-    Blob Storage 설정 시 models/imported/<uid>-hotspots.json 에 업로드하고 blob URL 반환.
+    Blob Storage 설정 시 models/imported/<uid>-hotspots.json에 업로드하고 blob URL 반환.
     미설정 시 로컬 저장 후 상대 경로 반환."""
     data = {
         "roomId": uid,

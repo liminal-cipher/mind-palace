@@ -21,7 +21,7 @@
       ② 카메라를 N각도로 돌려가며 매 프레임을 렌더 → 캔버스 이미지로 캡처
       ③ 각 프레임에 객체검출(DETR) 실행 → 화면상 사물 박스
       ④ 박스 중심에서 "실제 GLB 메쉬로 레이캐스트" → 진짜 3D 좌표
-         (★ 이게 내가 손으로 하던 __roomCalib.probe 의 자동화 ★)
+         (★ 이게 내가 손으로 하던 __roomCalib.probe의 자동화 ★)
       ⑤ 여러 각도 결과를 3D 거리로 중복 제거 → 방 전체 사물 목록
       ⑥ 규칙 기반으로 조선 개념 매핑 → 3D 공간에 번호 마커 배치
 
@@ -208,7 +208,7 @@
     scene.background = new THREE.Color(0x0b0f0d);
     const camera = new THREE.PerspectiveCamera(60, innerWidth/innerHeight, 0.05, 200);
     const renderer = new THREE.WebGLRenderer({ antialias:true, preserveDrawingBuffer:true });
-    // preserveDrawingBuffer:true → toDataURL 로 렌더 프레임을 캡처하려면 필요.
+    // preserveDrawingBuffer:true → toDataURL로 렌더 프레임을 캡처하려면 필요.
     renderer.setPixelRatio(Math.min(devicePixelRatio||1, 1.5));
     renderer.setSize(innerWidth, innerHeight);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -408,15 +408,15 @@
       raycaster.setFromCamera(new THREE.Vector2(cx*2 - 1, -(cy*2 - 1)), camera);
       return { o: raycaster.ray.origin.clone(), d: raycaster.ray.direction.clone().normalize() };
     }
-    // 점 p 에서 광선(o,d) 직선까지의 수직 거리(+ 앞쪽인지).
+    // 점 p에서 광선(o,d) 직선까지의 수직 거리(+ 앞쪽인지).
     function pointRayDistance(o, d, p) {
       const op = new THREE.Vector3().subVectors(p, o);
-      const t = op.dot(d);                       // t<0 이면 카메라 뒤
+      const t = op.dot(d);                       // t<0이면 카메라 뒤
       const proj = d.clone().multiplyScalar(t).add(o);
       return { dist: p.distanceTo(proj), t };
     }
     // 가중 최소제곱: 광선들의 "가장 가까운 공통점". 각 광선의 (I − d·dᵀ)에 가중 w를 실어
-    //   A=Σ w(I−d dᵀ), b=Σ w(I−d dᵀ)o 를 쌓고 A p = b 를 푼다. (대칭이라 row/col-major 무관)
+    //   A=Σ w(I−d dᵀ), b=Σ w(I−d dᵀ)o를 쌓고 A p = b를 푼다. (대칭이라 row/col-major 무관)
     function closestPointToRays(rays, w) {
       const A = new THREE.Matrix3().set(0,0,0, 0,0,0, 0,0,0);
       const ae = A.elements;
@@ -759,7 +759,7 @@
         window.__scanClusters = clusters;
         buildDetectMarkers(clusters);   // 검출된 모든 사물에 마커+라벨(항상 표시)
         buildRayLines(clusters);        // 광선(선)은 토글
-        renderDetectList(clusters);     // 검출 결과 리스트(인식율·광선수)
+        renderDetectList(clusters);     // 검출 결과 리스트(인식률·광선수)
         $("raysBtn").disabled = false;
         $("detectPanel").classList.remove("hide");
         renderList();
@@ -954,7 +954,7 @@
       controls.update();
     }
 
-    // AI가 인식한 모든 사물을 리스트로(인식율·광선수). 행 클릭 시 그 사물로 카메라 이동.
+    // AI가 인식한 모든 사물을 리스트로(인식률·광선수). 행 클릭 시 그 사물로 카메라 이동.
     function renderDetectList(clusters) {
       const el = $("detectList"); el.innerHTML = "";
       const sorted = clusters.slice().sort((a,b) => ((b.reliable?1:0)-(a.reliable?1:0)) || (b.count - a.count) || (b.score - a.score));

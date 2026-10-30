@@ -1,6 +1,6 @@
 /* Mindpalace chatbot STT add-on.
    Load after assistant.js, or anywhere with defer. It adds a microphone button
-   beside #mpSend and writes one recognized Korean utterance into #mpInput. */
+   beside #mpSend and writes one recognised Korean utterance into #mpInput. */
 (function () {
   "use strict";
 
